@@ -14,9 +14,9 @@
 }
 *{
 	margin:2px;
-	padding:2xp;
+	padding:2px;
 	font-family:cascadia code, arial;
-	font-size:2em;
+	/* font-size:2em; */
 	text-align:center;
 	align-items:center;
 	background-color: var(--bg);

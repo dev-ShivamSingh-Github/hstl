@@ -5,7 +5,7 @@
 *.sqlite3
 
 # env_var and settings
-.env
+env
 local_settings.py
 
 # compiled python files
