@@ -19,3 +19,6 @@ __pycache__/
 staticfiles/
 mediafiles/
 media/
+
+# migrations
+migrations/
