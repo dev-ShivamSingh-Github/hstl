@@ -23,9 +23,9 @@
 	python -m venv .venv
 	.\.venv\Scripts\activate
 	```
-1. Install requirenments.
+1. Install requirements.
 	```bash
-	pip install -r requirenments.txt
+	pip install -r requirements.txt
 	```
 1. Create "env/" and "env/__ init __.py" and "env/key.py".
 	* LINUX / MAC
