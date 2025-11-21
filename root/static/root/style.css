@@ -1,0 +1,23 @@
+@media (prefers-color-scheme:light) {
+	:root{
+		--text: #474747;
+		--bg: #f7f7f7;
+	}
+}
+@media (prefers-color-scheme: dark) {
+	:root{
+		--text: #dddddd;
+		--bg: #333333;
+	}
+}
+*{
+	margin:2px;
+	padding:2px;
+	font-family:cascadia code, arial;
+	text-align:center;
+	align-items:center;
+	background-color: var(--bg);
+	color: var(--text);
+	user-select: none;
+	-webkit-tap-highlight-color: transparent;
+}
