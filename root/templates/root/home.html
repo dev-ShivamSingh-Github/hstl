@@ -1,14 +1,21 @@
 {% extends "base.html" %}
-{% block title %}Index_Root{% endblock %}
+{% block title %}New Student{% endblock %}
 {% block static %}
 {% load static %}
 <link rel="stylesheet" href="{% static 'root/style.css' %}">
 <!-- <script type="text/javascript" src="{% static 'root/script.js' %}"></script> -->
 {% endblock %}
 {% block content %}
-<form action="" method="POST">
+<form action="" method="POST" name="std_details">
 	{% csrf_token %}
-	{{ form }}
+	{{ form.non_field_errors }}
+	{% for field in form %}
+	<div>
+		{{ field.label_tag }}
+		{{ field }}
+	</div>
+	{{ field.errors }}
+	{% endfor %}
 	<input type="submit" value="Submit">
 </form>
 {% endblock %}

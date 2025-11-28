@@ -6,9 +6,6 @@
 <!-- <script type="text/javascript" src="{% static 'student/script.js' %}"></script> -->
 {% endblock %}
 {% block content %}
-<form action="" method="POST">
-	{% csrf_token %}
-	{{ form }}
-	<input type="submit" value="Submit">
-</form>
+key:  {{ key }}
+val:  {{ val }}
 {% endblock %}
