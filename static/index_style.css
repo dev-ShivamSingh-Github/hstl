@@ -1,0 +1,25 @@
+form{
+	ul li{
+		list-style-type: none;
+		color: red;
+		border-left: 5px solid red;
+		margin-left: 5%;
+		border-bottom-left-radius: 11px;
+		text-decoration: underline wavy;
+		text-emphasis: " ";
+	}
+	@media (min-width: 900px){
+		div{		
+			display: grid;
+			grid-template-columns: 1fr 4fr;
+		}		
+	}
+}
+label, input{
+	font-size: xx-large;
+	min-height: 70px;
+	height: -webkit-fill-available;
+	width: -webkit-fill-available;
+	border: none;
+	border-radius: 10px;
+}

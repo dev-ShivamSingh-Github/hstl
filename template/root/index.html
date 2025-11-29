@@ -3,12 +3,8 @@
 {% block static %}
 {% load static %}
 <link rel="stylesheet" href="{% static 'root/style.css' %}">
-<!-- <script type="text/javascript" src="{% static 'root/script.js' %}"></script> -->
+<script type="text/javascript" src="{% static 'root/script.js' %}"></script>
 {% endblock %}
 {% block content %}
-<form action="" method="POST">
-	{% csrf_token %}
-	{{ form }}
-	<input type="submit" value="Submit">
-</form>
+Hello from root
 {% endblock %}

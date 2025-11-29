@@ -2,9 +2,24 @@
 {% block title %}Index{% endblock %}
 {% block static %}
 {% load static %}
-<link rel="stylesheet" href="{% static 'style.css' %}">
-<!-- <script type="text/javascript" src="{% static 'script.js' %}"></script> -->
+<link rel="stylesheet" href="{% static 'index_style.css' %}">
+<script type="text/javascript" src="{% static 'index_script.js' %}"></script>
 {% endblock %}
 {% block content %}
-Hello world!
+{% if form %}
+<form action="" method="POST" autocomplete="off">
+	{% csrf_token %}
+	{{ form.non_field_errors }}
+	{% for field in form %}
+	<div>
+		{{ field.label_tag }}
+		{{ field }}
+	</div>
+	{{ field.errors }}
+	{% endfor %}
+	<input type="submit" value="Submit">
+</form>
+{% else %}
+❌
+{% endif %}
 {% endblock %}
