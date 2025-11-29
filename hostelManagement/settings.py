@@ -77,7 +77,7 @@ WSGI_APPLICATION = 'hostelManagement.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'NAME': BASE_DIR / 'main.sqlite3',
     }
 }
 
@@ -120,6 +120,14 @@ STATIC_URL = 'static/'
 MEDIA_URL = 'media/'
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 MEDIA_ROOT = BASE_DIR / 'mediafiles'
+
+
+# SESSION
+
+SESSION_COOKIE_AGE = 3600 # in seconds
+SESSION_SAVE_EVERY_REQUEST = True # reset SESSION_COOKIE_AGE
+SESSION_EXPIRE_AT_BROWSER_CLOSE = True
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
