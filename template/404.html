@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block title %}404{% endblock %}
+{% block static %}
+<style>
+	*{
+		font-size: 2em;
+	}
+</style>
+<script>
+</script>
+{% endblock %}
+{% block content %}
+:(<br>Error::404<br>'Page Not Found'
+<br>{{ request.path }}
+<br>{{ request.get_full_path }}
+<br>{{ request.build_absolute_uri }}
+{% endblock %}
