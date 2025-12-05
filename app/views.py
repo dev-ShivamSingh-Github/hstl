@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
-from .forms import Login
+from .forms import Login, NewStudent, NewStaff
+from .models import Student, Staff
 
 def auth_redirect(k, v):
     if k == 'root' and v == 'root':
@@ -19,7 +20,6 @@ def index(request):
         if content['form'].is_valid():
             request.session['key'] = content['form'].cleaned_data['key']
             request.session['val'] = content['form'].cleaned_data['val']
-            print(content['form'].cleaned_data)
             return redirect(auth_redirect(request.session['key'], request.session['val']))
     else:
         content['form'] = Login()
@@ -30,13 +30,52 @@ class RootR:
     def index(request):
         content = {}
         if request.session.get('key') == 'root'and request.session.get('val') == 'root':
+            content['student'] = Student.objects.all()
+            content['staff'] = Staff.objects.all()
             return render(request, 'root/index.html', content)
         else:
             request.session.clear()
             return redirect('app:index')
     
-    def hmm(request):
-        pass
+    def newStudent(request):
+        content = {}
+        if request.session.get('key') == 'root'and request.session.get('val') == 'root':
+            if request.method == 'POST':
+                content['form'] = NewStudent(request.POST)
+                if content['form'].is_valid():
+                    content['form'].save()
+            else:
+                content['form'] = NewStudent()
+            return render(request, 'root/newStudent.html', content)
+        else:
+            request.session.clear()
+            return redirect('app:index')
+    
+    def newStaff(request):
+        content = {}
+        if request.session.get('key') == 'root'and request.session.get('val') == 'root':
+            if request.method == 'POST':
+                content['form'] = NewStaff(request.POST)
+                if content['form'].is_valid():
+                    content['form'].save()
+            else:
+                content['form'] = NewStaff()
+            return render(request, 'root/newStaff.html', content)
+        else:
+            request.session.clear()
+            return redirect('app:index')
+    
+    def editStudent(request, std_id):
+        return redirect('app:root_index')
+    
+    def deleteStudent(request, std_id):
+        return redirect('app:root_index')
+    
+    def editStaff(request, stf_id):
+        return redirect('app:root_index')
+    
+    def deleteStaff(request, stf_id):
+        return redirect('app:root_index')
 
 
 class StudentR:
@@ -47,9 +86,6 @@ class StudentR:
         else:
             request.session.clear()
         return redirect('app:index')
-    
-    def hmm(request):
-        pass
 
 
 class StaffR:
@@ -60,7 +96,4 @@ class StaffR:
         else:
             request.session.clear()
             return redirect('app:index')
-    
-    def hmm(request):
-        pass
 

@@ -1,25 +1,10 @@
-form{
-	ul li{
-		list-style-type: none;
-		color: red;
-		border-left: 5px solid red;
-		margin-left: 5%;
-		border-bottom-left-radius: 11px;
-		text-decoration: underline wavy;
-		text-emphasis: " ";
-	}
-	@media (min-width: 900px){
-		div{		
-			display: grid;
-			grid-template-columns: 1fr 4fr;
-		}		
-	}
-}
 label, input{
-	font-size: xx-large;
-	min-height: 70px;
-	height: -webkit-fill-available;
-	width: -webkit-fill-available;
 	border: none;
+	display: block;
+	min-height: 70px;
+	font-size: xx-large;
 	border-radius: 10px;
+	width: -webkit-fill-available;
+	height: -webkit-fill-available;
+	box-shadow: 0px 0px 0 0.2rem;
 }

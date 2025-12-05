@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% block title %}New Student{% endblock %}
+{% block static %}
+<style>
+label, input, textarea, select{
+	resize: none;
+	border: none;
+	display: block;
+	min-height: 70px;
+	font-size: xx-large;
+	border-radius: 10px;
+	box-sizing: border-box;
+	width: -webkit-fill-available;
+	height: -webkit-fill-available;
+	box-shadow: inset 0px 0px 0 0.2rem;
+}
+</style>
+{% endblock %}
+{% block content %}
+<h1>
+	<a href="{% url 'app:root_index' %}">
+		🔙
+	</a>
+	to home
+</h1>
+
+{% if form %}
+<form action="" method="POST" autocomplete="off">
+	{% csrf_token %}
+	{{ form.non_field_errors }}
+	{% for field in form %}
+	<div>
+		{{ field.label_tag }}
+		{{ field }}
+	</div>
+	{{ field.errors }}
+	{% endfor %}
+	<br><br>
+	<input type="submit" value="Add">
+</form>
+{% else %}
+❌
+{% endif %}
+{% endblock %}

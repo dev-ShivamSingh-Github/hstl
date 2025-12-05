@@ -1,14 +1,11 @@
-*{
-	/* outline: 1px solid; */
-}
 @media (prefers-color-scheme:light) {
 	:root{
-		--mainInfo: #ced0df;
+		--bg: #0000002e;
 	}
 }
 @media (prefers-color-scheme: dark) {
 	:root{
-		--mainInfo: #202020;
+		--bg: #ffffff2e;
 	}
 }
 @media (min-width: 900px){
@@ -24,6 +21,7 @@
 	}
 	#std, #stf{
 		min-height: 50px;
+		height: -webkit-fill-available;
 		position: relative;
 		border-radius: 10px;
 		border-top: 3px solid yellow;
@@ -37,8 +35,18 @@
 		border-top-left-radius: 7px;
 		border-top-right-radius: 7px;
 		width: -webkit-fill-available;
-		background-color: var(--mainInfo);
+		background-color: var(--bg);
 	}
+}
+table, th, td{
+	th{
+		background-color: var(--bg);
+	}
+	cursor: cell;
+	border-radius: 5px;
+	border: 1px double blue;
+	/* border-collapse: collapse; */
+	width: -webkit-fill-available;
 }
 #admin{
 	
