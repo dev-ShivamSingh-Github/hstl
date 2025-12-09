@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block title %}Index{% endblock %}
+{% block static %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'index_style.css' %}">
+<script type="text/javascript" src="{% static 'index_script.js' %}"></script>
+{% endblock %}
+{% block content %}
+{% if form %}
+<form action="" method="POST" autocomplete="off">
+	{% csrf_token %}
+	{{ form.non_field_errors }}
+	{% for field in form %}
+	<div>
+		{{ field.label_tag }}
+		{{ field }}
+	</div>
+	{{ field.errors }}
+	{% endfor %}
+	<br><br>
+	<input type="submit" value="Login">
+</form>
+{% else %}
+❌
+{% endif %}
+{% endblock %}

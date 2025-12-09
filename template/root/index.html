@@ -1,0 +1,81 @@
+{% extends "base.html" %}
+{% block title %}Index_Root{% endblock %}
+{% block static %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'root/style.css' %}">
+<script type="text/javascript" src="{% static 'root/script.js' %}"></script>
+{% endblock %}
+{% block content %}
+<div class="main">
+	<!-- Student div -->
+	<div id="std">
+		<div class="mainInfo">
+			<h1>
+			Student
+			<a href="{% url 'app:newStudent' %}">➕</a>
+			</h1>
+		</div><br><br>
+		{% if student %}
+			<br>
+			<table>
+				<tbody>
+					<tr>
+						<th>Name</th>
+						<th>Mobile</th>
+						<th>Edit</th>
+						<th>Delete</th>
+					</tr>
+					{% for s in student %}
+					<tr>
+						<td>{{ s.std_name }}</td>
+						<td>+91 {{ s.std_mobile }}</td>
+						<td><a href="{% url 'app:editStudent' s.id %}">✏️</a></td>
+						<td><a href="{% url 'app:deleteStudent' s.id %}">🗑️</a></td>
+					</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+		{% else %}
+			<h3>No Student. Click plus (➕) to add new student</h3>
+		{% endif %}
+	</div>
+	<!-- Staff div -->
+	<div id="stf">
+		<div class="mainInfo">
+			<h1>
+			Staff
+			<a href="{% url 'app:newStaff' %}">➕</a>
+			</h1>
+		</div><br><br>
+		{% if staff %}
+			<br>
+			<table>
+				<tbody>
+					<tr>
+						<th>Name</th>
+						<th>Mobile</th>
+						<th>Edit</th>
+						<th>Delete</th>
+					</tr>
+					{% for s in staff %}
+					<tr>
+						<td>{{ s.stf_name }}</td>
+						<td>+91 {{ s.stf_mobile }}</td>
+						<td><a href="{% url 'app:editStaff' s.id %}">✏️</a></td>
+						<td><a href="{% url 'app:deleteStaff' s.id %}">🗑️</a></td>
+					</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+		{% else %}
+			<h3>No Staff. Click plus (➕) to add new student</h3>
+		{% endif %}
+	</div>
+</div>
+<!-- Admin div -->
+<div class="admin">
+	<div>
+		<h1>Admin task</h1>
+	</div>
+</div>
+{% endblock %}

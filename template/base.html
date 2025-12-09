@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en-IN"><head>
+<title>{% block title %}Title{% endblock %}</title>
+<meta charset="UTF-8">
+<meta name="author" content="Shivam Singh">
+<meta name="description" content="hstl_mngt">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+*{
+	color-scheme: light dark;
+	margin:2px;
+	padding:2px;
+	font-family:cascadia code, arial;
+	text-align:center;
+	align-items:center;
+	align-content: center;
+	user-select: none;
+	-webkit-tap-highlight-color: transparent;
+}
+a{
+	text-decoration: none;
+}
+form{
+	ul li{
+		color: red;
+		font-size: x-large;
+		list-style-type: none;
+		border-bottom: 5px solid red;
+	}
+	@media (min-width: 900px){
+		div{		
+			display: grid;
+			grid-template-columns: 1fr 4fr;
+		}		
+	}
+}
+</style>
+<script>
+</script>
+{% block static %}{% endblock %}
+</head><body>
+{% block content %}{% endblock %}
+</body></html>

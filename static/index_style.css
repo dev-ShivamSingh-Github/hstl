@@ -1,0 +1,10 @@
+label, input{
+	border: none;
+	display: block;
+	min-height: 70px;
+	font-size: xx-large;
+	border-radius: 10px;
+	width: -webkit-fill-available;
+	height: -webkit-fill-available;
+	box-shadow: 0px 0px 0 0.2rem;
+}
