@@ -30,8 +30,8 @@ class RootR:
     def index(request):
         content = {}
         if request.session.get('key') == 'root'and request.session.get('val') == 'root':
-            content['student'] = Student.objects.all()
-            content['staff'] = Staff.objects.all()
+            content['student'] = Student.objects.filter(std_active=True)
+            content['staff'] = Staff.objects.filter(stf_active=True)
             return render(request, 'root/index.html', content)
         else:
             request.session.clear()
@@ -69,13 +69,23 @@ class RootR:
         return redirect('app:root_index')
     
     def deleteStudent(request, std_id):
-        return redirect('app:root_index')
+        if request.session.get('key') == 'root'and request.session.get('val') == 'root':
+            Student.objects.filter(id=std_id).update(std_active = False)
+            return redirect('app:root_index')
+        else:
+            request.session.clear()
+            return redirect('app:index')
     
     def editStaff(request, stf_id):
         return redirect('app:root_index')
     
     def deleteStaff(request, stf_id):
-        return redirect('app:root_index')
+        if request.session.get('key') == 'root'and request.session.get('val') == 'root':
+            Staff.objects.filter(id=stf_id).update(stf_active = False)
+            return redirect('app:root_index')
+        else:
+            request.session.clear()
+            return redirect('app:index')
 
 
 class StudentR:
