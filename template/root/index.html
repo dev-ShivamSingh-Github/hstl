@@ -27,8 +27,8 @@
 					</tr>
 					{% for s in student %}
 					<tr>
-						<td>{{ s.std_name }}</td>
-						<td>+91 {{ s.std_mobile }}</td>
+						<td>{{ s.name }}</td>
+						<td>+91 {{ s.mobile }}</td>
 						<td><a href="{% url 'app:editStudent' s.id %}">✏️</a></td>
 						<td><a href="{% url 'app:deleteStudent' s.id %}">🗑️</a></td>
 					</tr>
@@ -59,8 +59,8 @@
 					</tr>
 					{% for s in staff %}
 					<tr>
-						<td>{{ s.stf_name }}</td>
-						<td>+91 {{ s.stf_mobile }}</td>
+						<td>{{ s.name }}</td>
+						<td>+91 {{ s.mobile }}</td>
 						<td><a href="{% url 'app:editStaff' s.id %}">✏️</a></td>
 						<td><a href="{% url 'app:deleteStaff' s.id %}">🗑️</a></td>
 					</tr>

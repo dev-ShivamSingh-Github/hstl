@@ -50,6 +50,7 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'hostelManagement.urls'
+AUTH_USER_MODEL = 'app.MyUser'
 
 TEMPLATES = [
     {
