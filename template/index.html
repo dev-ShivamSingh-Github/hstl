@@ -7,7 +7,7 @@
 {% endblock %}
 {% block content %}
 {% if form %}
-<form action="" method="POST" autocomplete="off">
+<form id="login" action="{{ request.path }}" method="POST" autocomplete="off">
 	{% csrf_token %}
 	{{ form.non_field_errors }}
 	{% for field in form %}

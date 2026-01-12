@@ -12,6 +12,18 @@
 	```bash
 	git clone https://github.com/dev-ShivamSingh-Github/hstl.git .
 	```
+1. Create "env/" and "env/__ init __.py" and "env/key.py".
+	* LINUX / MAC
+	```bash
+	mkdir ./env/
+	touch ./env/__init__.py
+	touch ./env/key.py
+	```
+	> Windows user can do it via their code editor
+1. env/key.py contains "SECRET_KEY" variable's value.
+	```python
+	DJANGO_SECRET_KEY = '<Your django secret key>'
+	```
 1. Create a virtual environment and activate it.
 	* LINUX / MAC
 	```bash
@@ -27,35 +39,16 @@
 	```bash
 	pip install -r requirements.txt
 	```
-1. Create "env/" and "env/__ init __.py" and "env/key.py".
-	* LINUX / MAC
-	```bash
-	mkdir ./env/
-	touch ./env/__init__.py
-	touch ./env/key.py
-	```
-	> Windows user can do it via their code editor
-1. env/key.py contains "SECRET_KEY" variable's value.
-	```python
-	DJANGO_SECRET_KEY = '<Your django secret key>'
-	```
 1. Migrations
-	* LINUX / MAC
 	```bash
-	python3 ./manage.py makemigrations
-	python3 ./manage.py migrate
+	./manage.py makemigrations
+	./manage.py migrate
 	```
-	* WINDOWS
+1. Create Super User
 	```bash
-	python .\manage.py makemigrations
-	python .\manage.py migrate
+	./manage.py createsuperuser
 	```
 1. Runserver and explore the WebApp
-	* LINUX / MAC
 	```bash
-	python3 ./manage.py runserver
-	```
-	* WINDOWS
-	```bash
-	python .\manage.py runserver
+	./manage.py runserver
 	```

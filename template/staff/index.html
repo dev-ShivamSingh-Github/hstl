@@ -6,5 +6,7 @@
 <script type="text/javascript" src="{% static 'staff/script.js' %}"></script>
 {% endblock %}
 {% block content %}
-Hello from staff
+{% if staff %}
+Hello {{ staff.name }}
+{% endif %}
 {% endblock %}

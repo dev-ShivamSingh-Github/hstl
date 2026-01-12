@@ -4,13 +4,13 @@ from .forms import Login, NewMember
 from .models import MyUser
 
 def auth_redirect(request, k, v):
-    if k == 'root' and v == 'root':
-        request.session['id'] = True
-        return 'app:root_index'
     user = authenticate(username = k, password = v)
     if user is not None:
         request.session['id'] = user.pk
-        if user.is_staff:
+        if user.is_superuser:
+            request.session['id'] = True
+            return 'app:root_index'
+        elif user.is_staff:
             return 'app:staff_index'
         else:
             return 'app:student_index'
@@ -51,7 +51,7 @@ class RootR:
                 content['form'] = NewMember(request.POST)
                 if content['form'].is_valid():
                     MyUser.objects.create_student(content['form'].cleaned_data)
-                    return redirect('app:newStudent')
+                    return redirect('app:new_student')
             else:
                 content['form'] = NewMember()
             return render(request, 'root/newStudent.html', content)
@@ -65,7 +65,7 @@ class RootR:
                 content['form'] = NewMember(request.POST)
                 if content['form'].is_valid():
                     MyUser.objects.create_staff(content['form'].cleaned_data)
-                    return redirect('app:newStaff')
+                    return redirect('app:new_staff')
             else:
                 content['form'] = NewMember()
             return render(request, 'root/newStaff.html', content)
@@ -73,6 +73,10 @@ class RootR:
             return redirect('app:index')
     
     def editStudent(request, std_id):
+        content = {}
+        if request.session.get('id') is True:
+            pass
+            # content['student'] = MyUser.objects.student(std_id)
         return redirect('app:root_index')
     
     def deleteStudent(request, std_id):
@@ -83,6 +87,10 @@ class RootR:
             return redirect('app:index')
     
     def editStaff(request, stf_id):
+        content = {}
+        if request.session.get('id') is True:
+            pass
+            # content['staff'] = MyUser.objects.staff(stf_id)
         return redirect('app:root_index')
     
     def deleteStaff(request, stf_id):
@@ -96,7 +104,9 @@ class RootR:
 class StudentR:
     def index(request):
         content = {}
-        if request.session.get('id') is not None:
+        std_id = request.session.get('id')
+        if std_id is not None:
+            content['student'] = MyUser.objects.student(std_id)
             return render(request, 'student/index.html', content)
         else:
             request.session.clear()
@@ -106,7 +116,9 @@ class StudentR:
 class StaffR:
     def index(request):
         content = {}
-        if request.session.get('id') is not None:
+        stf_id = request.session.get('id')
+        if stf_id is not None:
+            content['staff'] = MyUser.objects.staff(stf_id)
             return render(request, 'staff/index.html', content)
         else:
             request.session.clear()

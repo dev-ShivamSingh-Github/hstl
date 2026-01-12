@@ -1,1 +1,1 @@
-alert("hello from index_script");
+alert("hello please provide a valid mobile number and password");
