@@ -24,7 +24,7 @@ label, input, textarea, select{
 	to home
 </h1>
 {% if form %}
-<form action="" method="POST" autocomplete="off">
+<form action="{{ request.path }}" method="POST" autocomplete="off">
 	{% csrf_token %}
 	{{ form.non_field_errors }}
 	{% for field in form %}

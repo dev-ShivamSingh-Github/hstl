@@ -12,7 +12,7 @@
 		<div class="mainInfo">
 			<h1>
 			Student
-			<a href="{% url 'app:newStudent' %}">➕</a>
+			<a href="{% url 'app:new_student' %}">➕</a>
 			</h1>
 		</div><br><br>
 		{% if student %}
@@ -20,17 +20,21 @@
 			<table>
 				<tbody>
 					<tr>
+						<th>#</th>
 						<th>Name</th>
 						<th>Mobile</th>
+						<th>View</th>
 						<th>Edit</th>
-						<th>Delete</th>
+						<!-- <th>Delete</th> -->
 					</tr>
 					{% for s in student %}
 					<tr>
-						<td>{{ s.std_name }}</td>
-						<td>+91 {{ s.std_mobile }}</td>
-						<td><a href="{% url 'app:editStudent' s.id %}">✏️</a></td>
-						<td><a href="{% url 'app:deleteStudent' s.id %}">🗑️</a></td>
+						<td>{{ forloop.counter }}</td>
+						<td>{{ s.name }}</td>
+						<td>+91 {{ s.mobile }}</td>
+						<td><a href="">ℹ️</a></td>
+						<td><a href="{% url 'app:edit_student' s.id %}">✏️</a></td>
+						<!-- <td><a href="{% url 'app:delete_student' s.id %}">🗑️</a></td> -->
 					</tr>
 					{% endfor %}
 				</tbody>
@@ -44,7 +48,7 @@
 		<div class="mainInfo">
 			<h1>
 			Staff
-			<a href="{% url 'app:newStaff' %}">➕</a>
+			<a href="{% url 'app:new_staff' %}">➕</a>
 			</h1>
 		</div><br><br>
 		{% if staff %}
@@ -52,17 +56,21 @@
 			<table>
 				<tbody>
 					<tr>
+						<th>#</th>
 						<th>Name</th>
 						<th>Mobile</th>
+						<th>View</th>
 						<th>Edit</th>
-						<th>Delete</th>
+						<!-- <th>Delete</th> -->
 					</tr>
 					{% for s in staff %}
 					<tr>
-						<td>{{ s.stf_name }}</td>
-						<td>+91 {{ s.stf_mobile }}</td>
-						<td><a href="{% url 'app:editStaff' s.id %}">✏️</a></td>
-						<td><a href="{% url 'app:deleteStaff' s.id %}">🗑️</a></td>
+						<td>{{ forloop.counter }}</td>
+						<td>{{ s.name }}</td>
+						<td>+91 {{ s.mobile }}</td>
+						<td><a href="">ℹ️</a></td>
+						<td><a href="{% url 'app:edit_staff' s.id %}">✏️</a></td>
+						<!-- <td><a href="{% url 'app:delete_staff' s.id %}">🗑️</a></td> -->
 					</tr>
 					{% endfor %}
 				</tbody>
