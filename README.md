@@ -12,18 +12,19 @@
 	```bash
 	git clone https://github.com/dev-ShivamSingh-Github/hstl.git .
 	```
-1. Create "env/" and "env/__ init __.py" and "env/key.py".
+1. Create "hostelManagement/local_setting.py".
 	* LINUX / MAC
 	```bash
-	mkdir ./env/
-	touch ./env/__init__.py
-	touch ./env/key.py
+	touch ./hostelManagement/local_setting.py
 	```
 	> Windows user can do it via their code editor
-1. env/key.py contains "SECRET_KEY" variable's value.
+1. hostelManagement/local_setting.py:
 	```python
 	DJANGO_SECRET_KEY = '<Your django secret key>'
+	ALLOWED_HOSTS = []
+	DEBUG = True
 	```
+	> Change settings according to the need
 1. Create a virtual environment and activate it.
 	* LINUX / MAC
 	```bash
