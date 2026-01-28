@@ -4,7 +4,7 @@ from django.utils.translation import gettext_lazy as _
 
 
 # Landing page login form
-class Login(forms.Form):
+class UserLogin(forms.Form):
     key = forms.CharField(label='Mobile', max_length=10)
     val = forms.CharField(label='Password', widget=forms.PasswordInput)
 
@@ -29,12 +29,5 @@ class NewMember(forms.ModelForm):
             'auth_id':{
                 'unique': 'A user already exists with this auth id.',
             }
-        }
-        help_texts = {
-            'name': _('Full Name of the the student'),
-            'mobile': _('(+91) 10 digit Mobile number of the student'),
-            'address': _('Full Address of the student'),
-            'auth_id': _('Authentic ID number of the student'),
-            'auth_type': _('Type of the Authentic ID'),
         }
 
