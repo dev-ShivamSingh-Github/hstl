@@ -1,0 +1,5 @@
+recursive-include app/static *
+recursive-include app/templates *
+
+recursive-exclude  * __pycache__
+recursive-exclude  * *.py[co]
