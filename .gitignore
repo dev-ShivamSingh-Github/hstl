@@ -1,23 +1,7 @@
-# Virtual Environment
-.venv
-
-# db
-*.sqlite3
-
-# env_var and settings
-local_settings.py
-
 # compiled python files
 __pycache__/
 *.pyc
 
-# Logs
-*.log
-
-# Media and static
-staticfiles/
-mediafiles/
-media/
-
-# migrations
-migrations/
+# distributions
+dist/
+hstl.egg-info
