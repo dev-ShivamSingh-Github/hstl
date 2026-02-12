@@ -1,5 +1,5 @@
-recursive-include app/static *
-recursive-include app/templates *
+recursive-include django_hstl/static *
+recursive-include django_hstl/templates *
 
 recursive-exclude  * __pycache__
 recursive-exclude  * *.py[co]
