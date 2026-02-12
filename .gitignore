@@ -1,7 +1,9 @@
-# compiled python files
+# Pyton
 __pycache__/
-*.pyc
-
-# distributions
+*.py[cod]
+*$py.class
+*.egg-info/
 dist/
-hstl.egg-info
+build/
+.venv/
+venv/

@@ -5,27 +5,26 @@
 ## Quick start
 1. Install app.
 	```bash
-	pip install ...
+	pip install django-hstl
 	```
-1. Modify settings.py such that::
+1. Modify settings.py such that
 	```python
-	AUTH_USER_MODEL = 'app.MyUser'
-	# ...
+	AUTH_USER_MODEL = 'django_hstl.MyUser'
+	
+	# Add the app in your INSTALLED_APPS
+	
 	INSTALLED_APPS = [
-		...,
-		"app",
+		# ...,
+		"django_hstl",
 	]
 	```
-1. Include the app URLconf in your project urls.py like this::
-
-    ``path("hstl/", include("app.urls")),``
-
-1. Run ``python manage.py migrate`` to create the models.
-1. Create Superuser::
+1. Include the app URLconf in your project urls.py like this
 	```python
-	manage.py createsuperuser
+	path("hstl/", include("django_hstl.urls")),
 	```
-1. Visit the ``/hstl/`` URL to explore the WEB APP.
+1. Run `python manage.py migrate` to create the models.
+1. Create Superuser `manage.py createsuperuser`
+1. Visit the `/hstl/` URL to explore the WEB APP.
 
 ## Getting Started
 1. Create a directory and cd into it.
@@ -46,28 +45,27 @@
 	```
 1. Install app.
 	```bash
-	pip install ...
+	pip install django-hstl
 	```
 1. Create a django project
 	```bash
 	django-admin startproject MyApp .
 	```
-1. Modify "MyApp/setting.py" such that::
+1. Modify "MyApp/setting.py" such that
 	```python
-	AUTH_USER_MODEL = 'app.MyUser'
-	# ...
+	AUTH_USER_MODEL = 'django_hstl.MyUser'
+	
+	# Add the app in your INSTALLED_APPS
+	
 	INSTALLED_APPS = [
 		# ...,
-		"app",
+		"django_hstl",
 	]
 	```
-1. Include the app URLconf in "MyApp/urls.py" like this::
-
-    ``path("hstl/", include("app.urls")),``
-
-1. Run ``python manage.py migrate`` to create the models.
-1. Create Superuser::
-	```python
-	manage.py createsuperuser
+1. Include the app URLconf in "MyApp/urls.py" like this
+    ```python
+	path("hstl/", include("django_hstl.urls")),
 	```
-1. Visit the ``/hstl/`` URL to explore the WEB APP.
+1. Run `python manage.py migrate` to create the models.
+1. Create Superuser `manage.py createsuperuser`
+1. Visit the `/hstl/` URL to explore the WEB APP.
