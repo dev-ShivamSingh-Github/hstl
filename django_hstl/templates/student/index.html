@@ -1,12 +1,12 @@
 {% extends "base.html" %}
-{% block title %}Index_Student{% endblock %}
+{% block title %}Index_Student{% endblock title %}
 {% block static %}
 {% load static %}
 <link rel="stylesheet" href="{% static 'student/style.css' %}">
 <script type="text/javascript" src="{% static 'student/script.js' %}"></script>
-{% endblock %}
+{% endblock static %}
 {% block content %}
 {% if student %}
 Hello {{ student.name }}
 {% endif %}
-{% endblock %}
+{% endblock content %}

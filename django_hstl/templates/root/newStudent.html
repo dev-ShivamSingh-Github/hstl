@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% block title %}New Student{% endblock %}
+{% block title %}New Student{% endblock title %}
 {% block static %}
 <style>
 label, input, textarea, select{
@@ -15,10 +15,10 @@ label, input, textarea, select{
 	box-shadow: inset 0px 0px 0 0.2rem;
 }
 </style>
-{% endblock %}
+{% endblock static %}
 {% block content %}
 <h1>
-	<a href="{% url 'app:root_index' %}">
+	<a href="{% url 'hstl:root_index' %}">
 		🔙
 	</a>
 	to home
@@ -41,4 +41,4 @@ label, input, textarea, select{
 {% else %}
 ❌
 {% endif %}
-{% endblock %}
+{% endblock content %}

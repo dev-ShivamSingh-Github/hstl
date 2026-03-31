@@ -1,10 +1,10 @@
 {% extends "base.html" %}
-{% block title %}Index_Root{% endblock %}
+{% block title %}Index_Root{% endblock title %}
 {% block static %}
 {% load static %}
 <link rel="stylesheet" href="{% static 'root/style.css' %}">
 <script type="text/javascript" src="{% static 'root/script.js' %}"></script>
-{% endblock %}
+{% endblock static %}
 {% block content %}
 <div class="main">
 	<!-- Student div -->
@@ -12,7 +12,7 @@
 		<div class="mainInfo">
 			<h1>
 			Student
-			<a href="{% url 'app:new_student' %}">➕</a>
+			<a href="{% url 'hstl:new_student' %}">➕</a>
 			</h1>
 		</div><br><br>
 		{% if student %}
@@ -23,18 +23,14 @@
 						<th>#</th>
 						<th>Name</th>
 						<th>Mobile</th>
-						<th>View</th>
-						<th>Edit</th>
-						<!-- <th>Delete</th> -->
+						<th>Detail</th>
 					</tr>
 					{% for s in student %}
 					<tr>
 						<td>{{ forloop.counter }}</td>
 						<td>{{ s.name }}</td>
 						<td>+91 {{ s.mobile }}</td>
-						<td><a href="">ℹ️</a></td>
-						<td><a href="{% url 'app:edit_student' s.id %}">✏️</a></td>
-						<!-- <td><a href="{% url 'app:delete_student' s.id %}">🗑️</a></td> -->
+						<td><a href="{% url 'hstl:info_student' s.id %}">ℹ️</a></td>
 					</tr>
 					{% endfor %}
 				</tbody>
@@ -48,7 +44,7 @@
 		<div class="mainInfo">
 			<h1>
 			Staff
-			<a href="{% url 'app:new_staff' %}">➕</a>
+			<a href="{% url 'hstl:new_staff' %}">➕</a>
 			</h1>
 		</div><br><br>
 		{% if staff %}
@@ -59,18 +55,14 @@
 						<th>#</th>
 						<th>Name</th>
 						<th>Mobile</th>
-						<th>View</th>
-						<th>Edit</th>
-						<!-- <th>Delete</th> -->
+						<th>Detail</th>
 					</tr>
 					{% for s in staff %}
 					<tr>
 						<td>{{ forloop.counter }}</td>
 						<td>{{ s.name }}</td>
 						<td>+91 {{ s.mobile }}</td>
-						<td><a href="">ℹ️</a></td>
-						<td><a href="{% url 'app:edit_staff' s.id %}">✏️</a></td>
-						<!-- <td><a href="{% url 'app:delete_staff' s.id %}">🗑️</a></td> -->
+						<td><a href="{% url 'hstl:info_staff' s.id %}">ℹ️</a></td>
 					</tr>
 					{% endfor %}
 				</tbody>
@@ -86,4 +78,4 @@
 		<h1>Admin task</h1>
 	</div>
 </div>
-{% endblock %}
+{% endblock content %}

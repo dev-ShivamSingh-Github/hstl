@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en-IN"><head>
-<title>{% block title %}{% endblock %}</title>
+<title>{% block title %}{% endblock title %}</title>
 <meta charset="UTF-8">
 <meta name="author" content="Shivam Singh">
 <meta name="description" content="hstl_mngt">
@@ -45,13 +45,13 @@ form{
 		div{		
 			display: grid;
 			grid-template-columns: 1fr 4fr;
-		}		
+		}
 	}
 }
 </style>
 <script>
 </script>
-{% block static %}{% endblock %}
+{% block static %}{% endblock static %}
 </head><body>
-{% block content %}{% endblock %}
+{% block content %}{% endblock content %}
 </body></html>
