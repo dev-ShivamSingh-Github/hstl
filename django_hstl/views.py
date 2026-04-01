@@ -1,6 +1,6 @@
 from django.contrib.auth import authenticate, login
 from django.shortcuts import render, redirect
-from .forms import UserLogin, NewMember
+from .forms import UserLogin, NewMember, MemberDetail
 from .models import MyUser
 
 def auth_response(request, content,  key, val):
@@ -8,18 +8,18 @@ def auth_response(request, content,  key, val):
     if user is not None and user.is_active:
         login(request, user)
         if request.user.is_superuser:
-            return redirect('app:root_index')
+            return redirect('hstl:root_index')
         elif request.user.is_staff:
-            return redirect('app:staff_index')
+            return redirect('hstl:staff_index')
         else:
-            return redirect('app:student_index')
+            return redirect('hstl:student_index')
     else:
-        content['form'].add_error(None, "Invalid mobile or password")
+        content['form'].add_error(None, "Login Error, Invalid Value(s)")
         return render(request, 'index.html', content)
 
 def index(request):
     content = {}
-    request.session.clear()
+    request.session.aflush()
     if request.method == 'POST':
         content['form'] = UserLogin(request.POST)
         if content['form'].is_valid():
@@ -42,8 +42,8 @@ class RootR:
             content['staff'] = MyUser.objects.get_staff()
             return render(request, 'root/index.html', content)
         else:
-            request.session.clear()
-            return redirect('app:index')
+            request.session.flush()
+            return redirect('hstl:index')
     
     def newStudent(request):
         content = {}
@@ -51,13 +51,17 @@ class RootR:
             if request.method == 'POST':
                 content['form'] = NewMember(request.POST)
                 if content['form'].is_valid():
-                    MyUser.objects.create_student(content['form'].cleaned_data)
-                    return redirect('app:new_student')
+                    # new_id = MyUser.objects.create_student(content['form'].cleaned_data)
+                    # return redirect('hstl:info_student', std_id=new_id)
+                    return redirect(
+                        'hstl:info_student',
+                        std_id = MyUser.objects.create_student(content['form'].cleaned_data)
+                    )
             else:
                 content['form'] = NewMember()
             return render(request, 'root/newStudent.html', content)
         else:
-            return redirect('app:index')
+            return redirect('hstl:index')
     
     def newStaff(request):
         content = {}
@@ -65,41 +69,47 @@ class RootR:
             if request.method == 'POST':
                 content['form'] = NewMember(request.POST)
                 if content['form'].is_valid():
-                    MyUser.objects.create_staff(content['form'].cleaned_data)
-                    return redirect('app:new_staff')
+                    # new_id = MyUser.objects.create_staff(content['form'].cleaned_data)
+                    # return redirect('hstl:info_staff', stf_id=new_id)
+                    return redirect(
+                        'hstl:info_staff',
+                        stf_id = MyUser.objects.create_staff(content['form'].cleaned_data)
+                    )
             else:
                 content['form'] = NewMember()
             return render(request, 'root/newStaff.html', content)
         else:
-            return redirect('app:index')
+            return redirect('hstl:index')
     
-    def editStudent(request, std_id):
+    def infoStudent(request, std_id):
         content = {}
-        if request.user.is_superuser:
-            pass
-            # content['student'] = MyUser.objects.student(std_id)
-        return redirect('app:root_index')
-    
-    def deleteStudent(request, std_id):
-        if request.user.is_superuser:
-            MyUser.objects.delete(std_id)
-            return redirect('app:root_index')
+        content['student'] = MyUser.objects.get_student(std_id)
+        if request.user.is_superuser and content['student'] is not None:
+            if request.method == 'POST':
+                content['form'] = MemberDetail(request.POST, instance=content['student'])
+                if content['form'].is_valid():
+                    content['form'].save()
+                    return redirect('hstl:root_index')
+            else:
+                content['form'] = MemberDetail(instance=content['student'])
+            return render(request, 'root/infoStudent.html', content)
         else:
-            return redirect('app:index')
+            return redirect('hstl:root_index')
     
-    def editStaff(request, stf_id):
+    def infoStaff(request, stf_id):
         content = {}
-        if request.user.is_superuser:
-            pass
-            # content['staff'] = MyUser.objects.staff(stf_id)
-        return redirect('app:root_index')
-    
-    def deleteStaff(request, stf_id):
-        if request.session.get('id') is True:
-            MyUser.objects.delete(stf_id)
-            return redirect('app:root_index')
+        content['staff'] = MyUser.objects.get_staff(stf_id)
+        if request.user.is_superuser and content['staff'] is not None:
+            if request.method == 'POST':
+                content['form'] = MemberDetail(request.POST, instance=content['staff'])
+                if content['form'].is_valid():
+                    content['form'].save()
+                    return redirect('hstl:root_index')
+            else:
+                content['form'] = MemberDetail(instance=content['staff'])
+            return render(request, 'root/infoStaff.html', content)
         else:
-            return redirect('app:index')
+            return redirect('hstl:root_index')
 
 
 class StudentR:
@@ -109,8 +119,8 @@ class StudentR:
             content['student'] = request.user
             return render(request, 'student/index.html', content)
         else:
-            request.session.clear()
-        return redirect('app:index')
+            request.session.flush()
+            return redirect('hstl:index')
 
 
 class StaffR:
@@ -120,6 +130,6 @@ class StaffR:
             content['staff'] = request.user
             return render(request, 'staff/index.html', content)
         else:
-            request.session.clear()
-            return redirect('app:index')
+            request.session.flush()
+            return redirect('hstl:index')
 

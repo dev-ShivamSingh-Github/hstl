@@ -9,7 +9,7 @@ class MyManager(BaseUserManager):
     def create_superuser(self, mobile, password):
         try:
             user = self.model(
-                mobile          =   mobile,
+                mobile          =   int(mobile),
                 auth_type       =   'a',
                 is_superuser    =   True,
                 name            =   input('Enter Name: '),
@@ -17,65 +17,60 @@ class MyManager(BaseUserManager):
                 auth_id         =   input('Enter Aadhar number: '),
             )
         except Exception as e:
-            exit('Unable to create superuser...', e)
-        user.set_password(password)
-        user.save()
-        return user
+            exit(f'Unable to create superuser...\n{e}')
+        else:
+            user.set_password(password)
+            user.save()
+        return f"SuperUser created."
     
     def create_student(self, data):
         try:
             user = self.model(
                 name        =   data['name'],
-                mobile      =   data['mobile'],
+                mobile      =   int(data['mobile']),
                 address     =   data['address'],
                 auth_type   =   data['auth_type'],
                 auth_id     =   data['auth_id'],
             )
         except Exception as e:
-            exit('Unable to create student...', e)
-        user.set_password(data['password'])
-        user.save()
-        return user
+            exit(f'Unable to create student...\n{e}')
+        else:
+            user.set_password(data['password'])
+            user.save()
+        return user.id
     
     def create_staff(self, data):
         try:
             user = self.model(
                 name        =   data['name'],
-                mobile      =   data['mobile'],
+                mobile      =   int(data['mobile']),
                 address     =   data['address'],
                 auth_type   =   data['auth_type'],
                 auth_id     =   data['auth_id'],
                 is_staff    =   True,
             )
         except Exception as e:
-            exit('Unable to create staff...', e)
-        user.set_password(data['password'])
-        user.save()
-        return user
+            exit(f'Unable to create staff...\n{e}')
+        else:
+            user.set_password(data['password'])
+            user.save()
+        return user.id
     
-    def get_student(self):
-        user = self.filter(is_staff = False, is_superuser = False, is_active = True)
-        return user
+    def get_student(self, id=None):
+        if id is not None:
+            try:
+                return self.get(pk = id, is_staff = False, is_superuser = False)
+            except Exception:
+                return None
+        return self.filter(is_staff = False, is_superuser = False, is_active = True)
     
-    def get_staff(self):
-        user = self.filter(is_staff = True, is_superuser = False, is_active = True)
-        return user
-    
-    def student(self , id):
-        user = self.get(pk = id)
-        return user
-    
-    def staff(self, id):
-        user = self.get(pk = id)
-        return user
-    
-    def delete(self, id):
-        user = self.get(pk = id)
-        if user.is_superuser:
-            exit("Cannot delete super user")
-        user.is_active = False
-        user.save()
-        return "User Deleted"
+    def get_staff(self, id=None):
+        if id is not None:
+            try:
+                return self.get(pk = id, is_staff = True, is_superuser = False)
+            except Exception:
+                return None
+        return self.filter(is_staff = True, is_superuser = False, is_active = True)
 
 
 class MyUser(AbstractBaseUser):
