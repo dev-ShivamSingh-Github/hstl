@@ -1,20 +1,6 @@
 {% extends "base.html" %}
 {% block title %}Info Staff{% endblock title %}
 {% block static %}
-<style>
-label, input, textarea, select, button{
-	resize: none;
-	border: none;
-	display: block;
-	min-height: 70px;
-	font-size: xx-large;
-	border-radius: 10px;
-	box-sizing: border-box;
-	width: -webkit-fill-available;
-	height: -webkit-fill-available;
-	box-shadow: inset 0px 0px 0 0.2rem;
-}
-</style>
 {% endblock static %}
 {% block content %}
 <h1>
@@ -24,26 +10,24 @@ label, input, textarea, select, button{
 	to home
 </h1>
 {% if staff %}
-	{{ staff.id }}
-	{{ staff.name }}
+	{% if form %}
+	<form id="infoStaff" action="{{ request.path }}" method="POST" autocomplete="off">
+		{% csrf_token %}
+		{{ form.non_field_errors }}
+		{% for field in form %}
+		<div>
+			{{ field.label_tag }}
+			{{ field }}
+		</div>
+		{{ field.errors }}
+		{% endfor %}
+		<br><br>
+		<input type="submit" value="Change">
+	</form>
+	{% else %}
+	❌
+	{% endif %}
 {% else %}
 	:(
-{% endif %}
-{% if form %}
-<form id="infoStaff" action="{{ request.path }}" method="POST" autocomplete="off">
-	{% csrf_token %}
-	{{ form.non_field_errors }}
-	{% for field in form %}
-	<div>
-		{{ field.label_tag }}
-		{{ field }}
-	</div>
-	{{ field.errors }}
-	{% endfor %}
-	<br><br>
-	<input type="submit" value="Change">
-</form>
-{% else %}
-❌
 {% endif %}
 {% endblock content %}

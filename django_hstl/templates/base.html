@@ -19,38 +19,8 @@
 <link rel="icon" type="image/png" sizes="16x16" href="{% static 'favicon/favicon-16x16.png' %}">
 <link rel="apple-touch-icon" type="image/png" href="{% static 'favicon/apple-touch-icon.png' %}">
 <link rel="manifest" href="{% static 'site.webmanifest' %}">
-<style>
-*{
-	color-scheme: light dark;
-	margin:2px;
-	padding:2px;
-	font-family:cascadia code, arial;
-	text-align:center;
-	align-items:center;
-	align-content: center;
-	-webkit-user-select: none;
-	-webkit-tap-highlight-color: transparent;
-}
-a{
-	text-decoration: none;
-}
-form{
-	ul li{
-		color: red;
-		font-size: x-large;
-		list-style-type: none;
-		border-bottom: 5px solid red;
-	}
-	@media (min-width: 900px){
-		div{		
-			display: grid;
-			grid-template-columns: 1fr 4fr;
-		}
-	}
-}
-</style>
-<script>
-</script>
+<link rel="stylesheet" href="{% static 'base.css' %}">
+<script></script>
 {% block static %}{% endblock static %}
 </head><body>
 {% block content %}{% endblock content %}

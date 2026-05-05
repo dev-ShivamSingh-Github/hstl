@@ -1,0 +1,148 @@
+*{
+	color-scheme: light dark;
+	margin:0px;
+	padding:0px;
+	font-family: 'Cascadia Code', 'Consolas', monospace;
+	text-align:center;
+	align-items:center;
+	align-content: center;
+	-webkit-user-select: none;
+	-webkit-tap-highlight-color: transparent;
+	box-sizing: border-box; /* Prevents padding from breaking width */
+}
+
+form {
+	/* 1. Scoping and Global Reset */
+	&, & * {
+		font-family: 'Cascadia Code', arial;
+		text-align: center;
+		-webkit-tap-highlight-color: transparent;
+		box-sizing: border-box;
+	}
+
+	max-width: 1000px;
+	margin: 40px auto;
+	padding: 40px;
+	background: color-mix(in srgb, canvas, gray 5%);
+	border-radius: 16px;
+	border: 2px solid color-mix(in srgb, canvastext, transparent 86%); 
+	box-shadow: 0 15px 35px rgba(0, 0, 0, 0.03);
+
+	/* 2. Grid Logic */
+	@media (min-width: 900px) {
+		div {		
+			display: grid;
+			grid-template-columns: 1fr 4fr;
+			gap: 15px;
+			margin-bottom: 15px;
+			align-items: center;
+		}
+	}
+
+	/* 3. The List Style */
+	ul li {
+		color: #e63946;
+		font-size: 1.1rem;
+		font-weight: bold;
+		list-style-type: none;
+		border-bottom: 3px solid #e63946;
+		margin-bottom: 25px;
+		padding-bottom: 10px;
+		text-transform: uppercase;
+	}
+
+	/* 4. Labels & All Input Types (Unified) */
+	label, 
+	input:not([type="submit"]),
+	select,
+	textarea {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		min-height: 65px;
+		font-size: 1.1rem;
+		border-radius: 10px;
+		width: 100%;
+	}
+
+	label {
+		font-weight: 600;
+		color: color-mix(in srgb, canvastext, transparent 40%);
+	}
+
+	/* 5. Shared Styling for Text Fields and Dropdowns */
+	input:not([type="submit"]),
+	select,
+	textarea {
+		appearance: none; 
+		padding: 15px 20px;
+		background: canvas; 
+		border: 2px solid color-mix(in srgb, canvastext, transparent 80%); 
+		-webkit-user-select: text;
+		transition: all 0.25s ease;
+		color: canvastext;
+	}
+
+	/* Textarea Specifics */
+	textarea {
+		min-height: 150px; /* Gives more room for long-form text */
+		resize: vertical; /* Allows user to expand down, but not break width */
+		text-align: left; /* Textareas usually feel better left-aligned */
+	}
+
+	/* Select Specifics */
+	select {
+		cursor: pointer;
+		text-align-last: center; /* Ensures the selected option stays centered */
+		background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='gray'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E");
+		background-repeat: no-repeat;
+		background-position: right 15px center;
+		background-size: 15px;
+		padding-right: 40px; /* Space for the custom arrow */
+	}
+
+	/* Focus States */
+	input:not([type="submit"]):focus,
+	select:focus,
+	textarea:focus {
+		outline: none;
+		border-color: #3a86ff;
+		box-shadow: 0 0 0 4px rgba(58, 134, 255, 0.12);
+	}
+
+	/* 6. The Submit Button */
+	input[type="submit"] {
+		appearance: none;
+		width: 100%;
+		min-height: 60px;
+		margin-top: 20px;
+		background-color: #3a86ff;
+		color: white;
+		border: none;
+		border-radius: 10px;
+		font-size: 1.1rem;
+		font-weight: bold;
+		cursor: pointer;
+		transition: transform 0.1s, filter 0.2s;
+	}
+
+	input[type="submit"]:hover {
+		filter: brightness(1.05);
+	}
+
+	input[type="submit"]:active {
+		transform: scale(0.98);
+	}
+	input:not([type="submit"])::placeholder {
+		opacity: 0.5;
+	}
+}
+a{
+	text-decoration:none;
+}
+header{
+	background-color: crimson;
+}
+footer{
+	background-color: darkslategrey;
+}

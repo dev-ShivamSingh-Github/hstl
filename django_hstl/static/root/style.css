@@ -1,53 +1,91 @@
-@media (prefers-color-scheme:light) {
-	:root{
-		--bg: #0000002e;
-	}
+:root {
+    --accent-std: #00b4d8;
+	--accent-stf: #7209b7;
+	--bg-card: color-mix(in srgb, canvas, gray 3%);
+    --border-soft: color-mix(in srgb, canvastext, transparent 92%);
 }
-@media (prefers-color-scheme: dark) {
-	:root{
-		--bg: #ffffff2e;
-	}
+
+/* 1. Page Wrapper - Cleaned up to prevent empty space */
+.main {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+	padding: 20px;
+    width: 100%;
+    /* Removed min-height: 100vh to stop vertical ghost space */
+    background-color: canvas;
 }
-@media (min-width: 900px){
-	.main{		
-		display: grid;
-		grid-template-columns: 1fr 1fr;
-	}
+
+/* 2. Card Styling */
+#std, #stf {
+    width: 100%;
+    /* max-width: 900px; */
+    background: var(--bg-card);
+    border-radius: 16px;
+    border: 1px solid var(--border-soft);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    overflow: hidden;
 }
-.main{
-	*{
-		margin: 0%;
-		padding: 0%;
-	}
-	#std, #stf{
-		min-height: 50px;
-		height: -webkit-fill-available;
-		position: relative;
-		border-radius: 10px;
-		border-top: 3px solid yellow;
-		border-bottom: 3px solid red;
-		border-left: 2px solid green;
-		border-right: 2px solid green;
-	}
-	.mainInfo{
-		top: 0%;
-		position: absolute;
-		border-top-left-radius: 7px;
-		border-top-right-radius: 7px;
-		width: -webkit-fill-available;
-		background-color: var(--bg);
-	}
+
+#std { border-top: 5px solid var(--accent-std); }
+#stf { border-top: 5px solid var(--accent-stf); }
+
+/* 3. Header Section */
+.mainInfo {
+    padding: 20px 25px;
+    display: flex;
+    justify-content: space-between;
+    background: color-mix(in srgb, canvastext, transparent 96%);
 }
-table, th, td{
-	th{
-		background-color: var(--bg);
-	}
-	cursor: cell;
-	border-radius: 5px;
-	border: 1px double blue;
-	/* border-collapse: collapse; */
-	width: -webkit-fill-available;
+
+.mainInfo h1 { font-size: 1.4rem; margin: 0; }
+
+.mainInfo a {
+    text-decoration: none;
+    font-size: 1.4rem;
+    background: canvas;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    border-radius: 50%;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    transition: all 0.2s ease;
 }
-#admin{
-	
+
+.mainInfo a:hover {
+    transform: scale(1.1) rotate(90deg);
+}
+
+/* 4. Scrollable Table Logic */
+.table-container {
+    width: 100%;
+    overflow-x: auto; /* This enables the swipe/scroll on small screens */
+    -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 500px; /* Forces a scrollbar if the screen gets very narrow */
+}
+
+th, td {
+    padding: 15px;
+    border-bottom: 1px solid var(--border-soft);
+    white-space: nowrap; /* Prevents text from wrapping to two lines */
+}
+
+th {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: color-mix(in srgb, canvastext, transparent 50%);
+}
+
+tr:hover {
+    background: color-mix(in srgb, canvastext, transparent 90%);
+}
+td:hover {
+    background: color-mix(in srgb, canvastext, transparent 85%);
 }
