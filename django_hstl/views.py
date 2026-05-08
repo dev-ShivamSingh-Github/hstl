@@ -55,7 +55,7 @@ class RootR:
                     # return redirect('hstl:info_student', std_id=new_id)
                     return redirect(
                         'hstl:info_student',
-                        std_id = MyUser.objects.create_student(content['form'].cleaned_data)
+                        std_id = MyUser.objects.create_user(content['form'].cleaned_data)
                     )
             else:
                 content['form'] = NewMember()
@@ -73,7 +73,7 @@ class RootR:
                     # return redirect('hstl:info_staff', stf_id=new_id)
                     return redirect(
                         'hstl:info_staff',
-                        stf_id = MyUser.objects.create_staff(content['form'].cleaned_data)
+                        stf_id = MyUser.objects.create_user(content['form'].cleaned_data, True)
                     )
             else:
                 content['form'] = NewMember()
