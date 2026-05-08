@@ -1,4 +1,3 @@
-# my validations...
 from django.core.exceptions import ValidationError
 from django.utils.translation import gettext_lazy as _
 
@@ -8,7 +7,7 @@ def validate_address(input_data):
 def validate_name(input_data):
     if any(c.isdigit() for c in input_data):
         raise ValidationError(
-                _('%(input_data) is not a valid name. Contains digit'),
+                _('%(input_data)s is not a valid name. Contains digit'),
                 params={"input_data": input_data},
                 code='name',
         )
@@ -21,16 +20,16 @@ def validate_mobile(input_data):
         all(c.isdigit() for c in input_data)
         ):
         raise ValidationError(
-                _('%(input_data) is not a valid mobile number'),
+                _('%(input_data)s is not a valid mobile number'),
                 params={"input_data": input_data},
                 code='mobile',
         )
     return True
 
 def validate_password(input_data):
-    if len(input_data) < 8:
+    if len(input_data) < 10:
         raise ValidationError(
-                _('Password should have at least 8 characters'),
+                _('Password should have at least 10 characters'),
                 code='password',
         )
     if not any(c.isupper() for c in input_data):
@@ -61,7 +60,7 @@ def validate_aadhar(input_data):
                 _('Aadhar number should only contain digit'),
                 code='aadhar',
         )
-    if len(input_data) < 12:
+    if len(input_data) != 12:
         raise ValidationError(
                 _('Invalid aadhar number'),
                 code='aadhar',

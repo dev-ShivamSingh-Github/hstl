@@ -1,27 +1,21 @@
 from django import forms
 from .models import MyUser
-from django.utils.translation import gettext_lazy as _
-
+from .valids import validate_mobile, validate_password
 
 # Landing page login form
 class UserLogin(forms.Form):
     key = forms.CharField(
         label='Mobile',
         max_length=10,
-        help_text='Enter your mobile number')
+        help_text='Enter your mobile number',
+        validators=[validate_mobile]
+    )
     val = forms.CharField(
         label='Password',
         widget=forms.PasswordInput,
-        help_text='Enter your password')
-
-    def clean(self):
-        mobile_number = super().clean().get('key')
-        if not (
-            len(mobile_number) == 10 and
-            mobile_number[0] not in "012345" and
-            all(c.isdigit() for c in mobile_number)
-            ):
-            self.add_error('key', 'Enter a valid mobile number')
+        help_text='Enter your password',
+        # validators=[validate_password]
+    )
 
 
 class NewMember(forms.ModelForm):
@@ -52,6 +46,6 @@ class MemberDetail(forms.ModelForm):
         fields = '__all__'
         exclude = ['password', 'is_superuser', 'join_date', 'last_login']
         help_texts = {
-            'is_active': _('Uncheck to delete student')
+            'is_active': 'Uncheck to delete student'
         }
 
