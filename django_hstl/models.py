@@ -28,7 +28,7 @@ class MyManager(BaseUserManager):
         except Exception as e:
             exit(f'Unable to create superuser...\n{e}')
         else:
-            user.set_password(password)
+            user.set_password(data['password'])
             user.save()
         return f"SuperUser created."
 
