@@ -1,12 +1,21 @@
 from django import forms
 from .models import MyUser
-from django.utils.translation import gettext_lazy as _
-
+from .valids import validate_mobile, validate_password
 
 # Landing page login form
 class UserLogin(forms.Form):
-    key = forms.CharField(label='Mobile', max_length=10)
-    val = forms.CharField(label='Password', widget=forms.PasswordInput)
+    key = forms.CharField(
+        label='Mobile',
+        max_length=10,
+        help_text='Enter your mobile number',
+        validators=[validate_mobile]
+    )
+    val = forms.CharField(
+        label='Password',
+        widget=forms.PasswordInput,
+        help_text='Enter your password',
+        # validators=[validate_password]
+    )
 
 
 class NewMember(forms.ModelForm):
@@ -14,14 +23,6 @@ class NewMember(forms.ModelForm):
         model = MyUser
         fields = '__all__'
         exclude = ['is_active', 'is_staff', 'is_superuser', 'join_date', 'last_login']
-        labels = {
-            'name': _('Name'),
-            'mobile': _('Mobile'),
-            'address': _('Address'),
-            'auth_type': _('ID type'),
-            'auth_id': _('ID\'s Value'),
-            'password': _('Create Password'),
-        }
         error_messages = {
             'mobile':{
                 'unique': 'A user already exists with this mobile number.',
@@ -29,5 +30,22 @@ class NewMember(forms.ModelForm):
             'auth_id':{
                 'unique': 'A user already exists with this auth id.',
             }
+        }
+
+    def clean(self):
+        try:
+            input_data = super().clean().get('password')
+            validate_password(input_data)
+        except Exception as e:
+            self.add_error(e.code, e)
+
+
+class MemberDetail(forms.ModelForm):
+    class Meta():
+        model = MyUser
+        fields = '__all__'
+        exclude = ['password', 'is_superuser', 'join_date', 'last_login']
+        help_texts = {
+            'is_active': 'Uncheck to delete student'
         }
 

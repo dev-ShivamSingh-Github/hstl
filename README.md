@@ -12,11 +12,21 @@
 	AUTH_USER_MODEL = 'django_hstl.MyUser'
 	
 	# Add the app in your INSTALLED_APPS
-	
 	INSTALLED_APPS = [
 		# ...,
 		"django_hstl",
 	]
+	
+	# Basic Session related settings
+	SESSION_COOKIE_AGE = 300
+	SESSION_SAVE_EVERY_REQUEST = True
+	SESSION_EXPIRE_AT_BROWSER_CLOSE = True
+	
+	# Advance Session related settings
+	SESSION_COOKIE_SECURE = True
+	CSRF_COOKIE_SECURE = True
+	SECURE_SSL_REDIRECT = True
+	SESSION_COOKIE_HTTPONLY = True
 	```
 1. Include the app URLconf in your project urls.py like this
 	```python
@@ -56,16 +66,20 @@
 	AUTH_USER_MODEL = 'django_hstl.MyUser'
 	
 	# Add the app in your INSTALLED_APPS
-	
 	INSTALLED_APPS = [
 		# ...,
 		"django_hstl",
 	]
+	
+	# Basic Session related settings
+	SESSION_COOKIE_AGE = 300
+	SESSION_SAVE_EVERY_REQUEST = True
+	SESSION_EXPIRE_AT_BROWSER_CLOSE = True
 	```
 1. Include the app URLconf in "MyApp/urls.py" like this
     ```python
 	path("hstl/", include("django_hstl.urls")),
 	```
 1. Run `python manage.py migrate` to create the models.
-1. Create Superuser `manage.py createsuperuser`
+1. Create Superuser `manage.py createsuperuser` and start development server `manage.py runserver`
 1. Visit the `/hstl/` URL to explore the WEB APP.

@@ -1,10 +1,7 @@
 {% extends "base.html" %}
-{% block title %}Index{% endblock %}
+{% block title %}Index{% endblock title %}
 {% block static %}
-{% load static %}
-<link rel="stylesheet" href="{% static 'index_style.css' %}">
-<!-- <script type="text/javascript" src="{% static 'index_script.js' %}"></script> -->
-{% endblock %}
+{% endblock static%}
 {% block content %}
 {% if form %}
 <form id="login" action="{{ request.path }}" method="POST" autocomplete="off">
@@ -23,4 +20,4 @@
 {% else %}
 ❌
 {% endif %}
-{% endblock %}
+{% endblock content %}
