@@ -12,21 +12,22 @@
 }
 
 form {
-	/* 1. Scoping and Global Reset */
+	/* 1. Scoping and Global Reset
 	&, & * {
 		font-family: 'Cascadia Code', arial;
 		text-align: center;
 		-webkit-tap-highlight-color: transparent;
 		box-sizing: border-box;
-	}
+	}*/
 
 	max-width: 1000px;
-	margin: 40px auto;
-	padding: 40px;
-	background: color-mix(in srgb, canvas, gray 5%);
+	margin: 20px auto;
+	padding: 20px;
+	background: color-mix(in srgb, canvas, gray 10%);
 	border-radius: 16px;
 	border: 2px solid color-mix(in srgb, canvastext, transparent 86%); 
-	box-shadow: 0 15px 35px rgba(0, 0, 0, 0.03);
+	box-shadow: 0px 0px 35px 0px rgba(0.1, 0.1, 0.1, 1.0);
+	/*box-shadow: 0 15px 35px rgba(0, 0, 0, 0.03);*/
 
 	/* 2. Grid Logic */
 	@media (min-width: 900px) {
@@ -34,9 +35,10 @@ form {
 			display: grid;
 			grid-template-columns: 1fr 4fr;
 			gap: 15px;
-			margin-bottom: 15px;
-			align-items: center;
 		}
+	}
+	div {
+		margin-bottom: 15px;
 	}
 
 	/* 3. The List Style */
@@ -57,7 +59,6 @@ form {
 	select,
 	textarea {
 		display: flex;
-		align-items: center;
 		justify-content: center;
 		min-height: 65px;
 		font-size: 1.1rem;
@@ -67,7 +68,8 @@ form {
 
 	label {
 		font-weight: 600;
-		color: color-mix(in srgb, canvastext, transparent 40%);
+		background-color: color-mix(in srgb, canvastext, transparent 90%);
+		height: -webkit-fill-available;
 	}
 
 	/* 5. Shared Styling for Text Fields and Dropdowns */
@@ -85,8 +87,8 @@ form {
 
 	/* Textarea Specifics */
 	textarea {
-		min-height: 150px; /* Gives more room for long-form text */
-		resize: vertical; /* Allows user to expand down, but not break width */
+		max-height: 150px; /* Gives more room for long-form text */
+		resize: none; /* Allows user to expand down, but not break width */
 		text-align: left; /* Textareas usually feel better left-aligned */
 	}
 
@@ -97,7 +99,7 @@ form {
 		background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='gray'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E");
 		background-repeat: no-repeat;
 		background-position: right 15px center;
-		background-size: 15px;
+		background-size: 1.3rem;
 		padding-right: 40px; /* Space for the custom arrow */
 	}
 
@@ -110,12 +112,18 @@ form {
 		box-shadow: 0 0 0 4px rgba(58, 134, 255, 0.12);
 	}
 
+	/* Resetting the Checkbox specifically */
+    input[type="checkbox"] {
+        appearance: checkbox;
+        -webkit-appearance: checkbox;
+    }
+
 	/* 6. The Submit Button */
 	input[type="submit"] {
 		appearance: none;
 		width: 100%;
 		min-height: 60px;
-		margin-top: 20px;
+		/*margin-top: 20px;*/
 		background-color: #3a86ff;
 		color: white;
 		border: none;
