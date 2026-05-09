@@ -74,11 +74,45 @@
             <h3>No Staff found. Click ➕ to add.</h3>
         {% endif %}
     </div>
-</div>
-<!-- Admin div -->
-<div class="admin">
-	<div>
-		<h1>Admin task</h1>
-	</div>
+
+    <div id="inactive">
+        <div class="mainInfo">
+            <h1>Deleted User</h1>
+        </div>
+
+        {% if inactive %}
+            <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Name</th>
+                        <th>Mobile</th>
+                        <th>User Type</th>
+                        <th>Info</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for s in inactive %}
+                    <tr>
+                        <td>{{ forloop.counter }}</td>
+                        <td><strong>{{ s.name }}</strong></td>
+                        <td>{{ s.mobile }}</td>
+                        {% if s.is_staff %}
+                        <td>Staff</td>
+                        <td><a href="{% url 'hstl:info_staff' s.id %}">ℹ️</a></td>
+                        {% else %}
+                        <td>Student</td>
+                        <td><a href="{% url 'hstl:info_student' s.id %}">ℹ️</a></td>
+                        {% endif %}
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            </div>
+        {% else %}
+            <h3>No Inactive member</h3>
+        {% endif %}
+    </div>
 </div>
 {% endblock content %}

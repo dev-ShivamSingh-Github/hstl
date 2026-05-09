@@ -5,22 +5,34 @@ def validate_address(input_data):
     return True
 
 def validate_name(input_data):
+    if len(input_data) < 3:
+        raise ValidationError(
+                _('"%(input_data)s" is not a valid name'),
+                params={"input_data": input_data},
+                code='name',
+        )
     if any(c.isdigit() for c in input_data):
         raise ValidationError(
-                _('%(input_data)s is not a valid name. Contains digit'),
+                _('"%(input_data)s" is not a valid name. Contains digit'),
+                params={"input_data": input_data},
+                code='name',
+        )
+    if not input_data.strip().replace(' ', '').isalpha():
+        raise ValidationError(
+                _('"%(input_data)s" is not a valid name. Contains special characters'),
                 params={"input_data": input_data},
                 code='name',
         )
     return True
 
 def validate_mobile(input_data):
-    if not (
-        len(input_data) == 10 and
-        input_data[0] not in "012345" and
-        all(c.isdigit() for c in input_data)
+    if (
+        len(input_data) != 10 or
+        input_data[0] in "012345" or
+        not input_data.isdigit()
         ):
         raise ValidationError(
-                _('%(input_data)s is not a valid mobile number'),
+                _('"%(input_data)s" is not a valid mobile number'),
                 params={"input_data": input_data},
                 code='mobile',
         )
@@ -55,14 +67,14 @@ def validate_password(input_data):
     return True
 
 def validate_aadhar(input_data):
-    if not all(c.isdigit() for c in input_data):
+    if not input_data.isdigit():
         raise ValidationError(
                 _('Aadhar number should only contain digit'),
                 code='aadhar',
         )
     if len(input_data) != 12:
         raise ValidationError(
-                _('Invalid aadhar number'),
+                _('Aadhar number should have 12 digits only'),
                 code='aadhar',
         )
     return True

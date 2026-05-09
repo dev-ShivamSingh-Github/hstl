@@ -1,4 +1,4 @@
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import render, redirect
 from .forms import UserLogin, NewMember, MemberDetail
 from .models import MyUser
@@ -19,7 +19,7 @@ def auth_response(request, content,  key, val):
 
 def index(request):
     content = {}
-    request.session.aflush()
+    logout(request)
     if request.method == 'POST':
         content['form'] = UserLogin(request.POST)
         if content['form'].is_valid():
@@ -40,6 +40,7 @@ class RootR:
         if request.user.is_superuser:
             content['student'] = MyUser.objects.get_student()
             content['staff'] = MyUser.objects.get_staff()
+            content['inactive'] = MyUser.objects.get_inactive()
             return render(request, 'root/index.html', content)
         else:
             request.session.flush()

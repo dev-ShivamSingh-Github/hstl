@@ -67,6 +67,11 @@ class MyManager(BaseUserManager):
                 return None
         return self.filter(is_staff = True, is_superuser = False, is_active = True)
 
+    def get_inactive(self, id=None):
+        if id is not None:
+            pass
+        return self.filter(is_active = False).order_by('-is_staff') # True first because is 1
+
 
 class MyUser(AbstractBaseUser):
     name = models.CharField(

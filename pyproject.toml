@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "django-hstl"
-version = "0.4"
+version = "0.4-beta-1"
 dependencies = [
     "django",
 ]
