@@ -26,14 +26,20 @@ def validate_name(input_data):
     return True
 
 def validate_mobile(input_data):
-    if (
-        len(input_data) != 10 or
-        input_data[0] in "012345" or
-        not input_data.isdigit()
-        ):
+    if len(input_data) != 10:
         raise ValidationError(
-                _('"%(input_data)s" is not a valid mobile number'),
-                params={"input_data": input_data},
+                _('Mobile number should only contain 10 digit'),
+                code='mobile',
+        )
+    if input_data[0] in "012345":
+        raise ValidationError(
+                _('Mobile number can not begin with "%(input_data)s"'),
+                params={"input_data": input_data[0]},
+                code='mobile',
+        )
+    if not input_data.isdigit():
+        raise ValidationError(
+                _('Mobile number should only contain digit'),
                 code='mobile',
         )
     return True
