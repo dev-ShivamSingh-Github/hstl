@@ -84,3 +84,10 @@ def validate_aadhar(input_data):
                 code='aadhar',
         )
     return True
+
+def validate_price(input_data):
+    if input_data < 1.00:
+        raise ValidationError(
+                _('Invalid room price'),
+                code='aadhar',
+        )

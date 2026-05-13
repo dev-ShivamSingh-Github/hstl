@@ -5,7 +5,8 @@ from .valids import (
     validate_password,
     validate_name,
     validate_address,
-    validate_aadhar
+    validate_aadhar,
+    validate_price
 )
 
 # Create your models here.
@@ -139,7 +140,161 @@ class MyUser(AbstractBaseUser):
     REQUIRED_FIELDS = ['name', 'auth_id', 'address']
     
     objects     =   MyManager()
-    
+
+    def has_perm(self, perm, obj=None):
+        return self.is_superuser
+
+    def has_module_perms(self, app_label):
+        return self.is_superuser
+
     def __str__(self):
         return f'{self.name}'
+
+
+class Room(models.Model):
+    room_number = models.CharField(
+        max_length=5,
+        unique=True,
+        verbose_name='Room Number',
+        help_text='Eg.AS101:A=AC,S=Single',
+    )
+    room_type = models.CharField(
+        max_length=2,
+        choices=[
+            ('A1', 'AC Single'),
+            ('N1', 'Non-AC Single'),
+            ('A2', 'AC Double'),
+            ('N2', 'Non-AC Double'),
+            ('A3', 'AC Triple'),
+            ('N3', 'Non-AC Triple'),
+            ('A4', 'AC Quadruple'),
+            ('N4', 'Non-AC Quadruple'),
+        ],
+        verbose_name='Room Type',
+        help_text='Select a room type'
+    )
+    price = models.DecimalField(
+        max_digits=10,
+        decimal_places=2,
+        verbose_name='Price',
+        help_text='Price of the Room',
+        validators=[validate_price]
+    )
+    def __str__(self):
+        return f"{self.room_number}::{self.get_room_type_display()}"
+
+
+class Bed(models.Model):
+    myuser = models.OneToOneField(
+        MyUser,
+        on_delete=models.SET_NULL,
+        limit_choices_to={
+            'is_staff': False,
+            'is_superuser': False,
+            'is_active': True
+        },
+        blank=True,
+        null = True,
+        verbose_name='StudentID',
+        help_text='...'
+    )
+    room = models.ForeignKey(
+        Room,
+        on_delete=models.CASCADE,
+        verbose_name='RoomID',
+        help_text='...'
+    )
+    def __str__(self):
+        return f"Bed is occupied"
+
+
+class Fee(models.Model):
+    bed = models.ForeignKey(
+        Bed,
+        on_delete=models.CASCADE,
+        verbose_name='BedID',
+        help_text='...'
+    )
+    status = models.CharField(
+        max_length=1,
+        choices=[
+            ('P', 'Paid'),
+            ('U', 'Pending'),
+            ('O', 'Overdue'),
+        ],
+        default='U',
+        verbose_name='Payment Status',
+        help_text='Status of the payment'
+    )
+    paid_date = models.DateField(
+        null=True,
+        blank=True,
+        verbose_name='Payment Date',
+        help_text='Date of the payment'
+    )
+    '''amount_due = models.DecimalField(
+        max_digits=10,
+        decimal_places=2,
+        verbose_name='Amount Due',
+        help_text='Due amount of the student'
+    )
+    due_date = models.DateField(
+        default=bed.myuser.join_date,
+        verbose_name='Due Date',
+        help_text='Payment day of the student'
+    )'''
+
+    def __str__(self):
+        return f"Invoice {self.id} | {self.bed.myuser.name} | {self.get_status_display()}"
+
+
+class Complaint(models.Model):
+    bed = models.ForeignKey(
+        Bed,
+        on_delete=models.CASCADE,
+        verbose_name='BedID',
+        help_text='...'
+    )
+    category = models.CharField(
+        max_length=1,
+        choices=[
+            ('E', 'Electrical'),
+            ('P', 'Plumbing'),
+            ('C', 'Cleaning'),
+            ('I', 'Internet'),
+            ('O', 'Other'),
+        ],
+        verbose_name='Category',
+        help_text='Category of the Complaint'
+    )
+    status = models.CharField(
+        max_length=1,
+        choices=[
+            ('O', 'Open'),
+            ('R', 'Resolved'),
+            ('I', 'In Progress'),
+        ],
+        default='O',
+        verbose_name='Status',
+        help_text='Status of Complaint'
+    )
+    description = models.TextField(
+        verbose_name='Description',
+        help_text='Please tell us more about issue'
+    )
+    raised_on = models.DateTimeField(
+        auto_now_add=True,
+        verbose_name='Raised on',
+        help_text='Ticket raised on'
+    )
+    # Added so the Admin can leave a note (e.g., "Electrician called, will visit tomorrow")
+    admin_remarks = models.TextField(
+        blank=True,
+        null=True,
+        verbose_name='Admin Rmarks',
+        help_text='Admin remark on Complaint'
+    )
+    
+    def __str__(self):
+        return f"{self.get_category_display()} Issue - {self.bed.myuser.name} ({self.get_status_display()})"
 
