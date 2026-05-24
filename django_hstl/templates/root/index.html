@@ -114,5 +114,39 @@
             <h3>No Inactive member</h3>
         {% endif %}
     </div>
+
+    <div id="room">
+        <div class="mainInfo">
+            <h1>Rooms</h1>
+            <a href="{% url 'hstl:new_room' %}">➕</a>
+        </div>
+
+        {% if room %}
+            <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Room Number</th>
+                        <th>Type</th>
+                        <th>Info</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for r in room %}
+                    <tr>
+                        <td>{{ forloop.counter }}</td>
+                        <td><strong>{{ r.room_number }}</strong></td>
+                        <td>{{ r.get_room_type_display }}</td>
+                        <td><a href="{% url 'hstl:info_room' %}">ℹ️</a></td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            </div>
+        {% else %}
+            <h3>No Rooms found. Click ➕ to add.</h3>
+        {% endif %}
+    </div>
 </div>
 {% endblock content %}

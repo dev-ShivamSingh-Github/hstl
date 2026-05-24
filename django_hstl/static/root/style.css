@@ -2,6 +2,7 @@
     --accent-std: #00b4d8;
 	--accent-stf: #7209b7;
     --accent-inactive: #d70707;
+    --accent-room: #b5cf22cc;
 	--bg-card: color-mix(in srgb, canvas, gray 3%);
     --border-soft: color-mix(in srgb, canvastext, transparent 92%);
 }
@@ -18,7 +19,7 @@
 }
 
 /* 2. Card Styling */
-#std, #stf, #inactive{
+#std, #stf, #inactive, #room{
     width: 100%;
     /* max-width: 900px; */
     background: var(--bg-card);
@@ -32,6 +33,7 @@
 #std { border-top: 5px solid var(--accent-std); }
 #stf { border-top: 5px solid var(--accent-stf); }
 #inactive { border-top: 5px solid var(--accent-inactive); }
+#room { border-top: 5px solid var(--accent-room); }
 
 /* 3. Header Section */
 .mainInfo {
