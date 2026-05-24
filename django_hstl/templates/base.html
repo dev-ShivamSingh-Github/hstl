@@ -26,7 +26,8 @@
 {% block content %}{% endblock content %}
 {% block footer %}
 <footer>
-  <form id="logout" action="{% url 'hstl:index' %}" method="GET">
+  <form id="logout" action="{% url 'hstl:logout' %}" method="POST">
+    {% csrf_token %}
     <input type="submit" value="Logout">
   </form>
 </footer>

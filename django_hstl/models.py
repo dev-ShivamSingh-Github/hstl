@@ -27,7 +27,7 @@ class MyManager(BaseUserManager):
                 is_superuser    =   True
             )
         except Exception as e:
-            exit(f'Unable to create superuser...\n{e}')
+            raise ValidationError(f'Unable to create superuser: {e}')
         else:
             user.set_password(data['password'])
             user.save()
@@ -46,7 +46,7 @@ class MyManager(BaseUserManager):
                 is_staff    =   staff,
             )
         except Exception as e:
-            exit(f'Unable to create staff...\n{e}')
+            raise ValidationError(f'Unable to create user: {e}')
         else:
             user.set_password(data['password'])
             user.save()

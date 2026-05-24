@@ -100,3 +100,51 @@ class RoomManagementTests(TestCase):
         response = self.client.get(new_room_url)
         self.assertRedirects(response, reverse('hstl:index'))
 
+
+class SecurityTests(TestCase):
+    def setUp(self):
+        self.superuser = User.objects.model(
+            name="Super User",
+            mobile="9876543210",
+            address="Admin Quarter",
+            auth_id="123456789012",
+            is_staff=True,
+            is_superuser=True
+        )
+        self.superuser.set_password("Password@123")
+        self.superuser.save()
+
+        self.student = User.objects.model(
+            name="John Doe",
+            mobile="9111111111",
+            address="Student Room 1",
+            auth_id="111122223333",
+            is_staff=False,
+            is_superuser=False
+        )
+        self.student.set_password("Password@123")
+        self.student.save()
+
+    def test_homepage_redirects_authenticated_users(self):
+        # Superuser should redirect to root_index
+        self.client.force_login(self.superuser)
+        response = self.client.get(reverse('hstl:index'))
+        self.assertRedirects(response, reverse('hstl:root_index'))
+
+        # Student should redirect to student_index
+        self.client.force_login(self.student)
+        response = self.client.get(reverse('hstl:index'))
+        self.assertRedirects(response, reverse('hstl:student_index'))
+
+    def test_logout_only_allows_post(self):
+        self.client.force_login(self.student)
+        url = reverse('hstl:logout')
+        
+        # GET request to logout should fail with 405 (Method Not Allowed)
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, 405)
+
+        # POST request should log the user out and redirect to login page
+        response = self.client.post(url)
+        self.assertRedirects(response, reverse('hstl:index'))
+
