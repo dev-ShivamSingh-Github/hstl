@@ -1,5 +1,5 @@
 from django import forms
-from .models import MyUser
+from .models import MyUser, Room
 from .valids import validate_mobile, validate_password
 
 # Landing page login form
@@ -48,4 +48,10 @@ class MemberDetail(forms.ModelForm):
         help_texts = {
             'is_active': 'Uncheck to delete student'
         }
+
+
+class RoomDetail(forms.ModelForm):
+    class Meta:
+        model = Room
+        fields = '__all__'
 

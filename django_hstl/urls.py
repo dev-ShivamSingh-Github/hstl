@@ -10,7 +10,7 @@ urlpatterns = [
     path('root/newStaff/', RootR.newStaff, name='new_staff'),
     path('root/infoStaff/<int:stf_id>', RootR.infoStaff, name='info_staff'),
     path('root/newRoom/', RootR.newRoom, name='new_room'),
-    path('root/infoRoom/', RootR.infoRoom, name='info_room'),
+    path('root/infoRoom/<int:room_id>', RootR.infoRoom, name='info_room'),
     path('student/', StudentR.index, name='student_index'),
     path('staff/', StaffR.index, name='staff_index'),
 ]

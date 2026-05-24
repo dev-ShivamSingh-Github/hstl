@@ -1,6 +1,6 @@
 from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import render, redirect
-from .forms import UserLogin, NewMember, MemberDetail
+from .forms import UserLogin, NewMember, MemberDetail, RoomDetail
 from .models import MyUser, Room
 
 def auth_response(request, content,  key, val):
@@ -117,19 +117,34 @@ class RootR:
         content = {}
         if request.user.is_superuser:
             if request.method == 'POST':
+                content['form'] = RoomDetail(request.POST)
+                if content['form'].is_valid():
+                    content['form'].save()
                     return redirect('hstl:root_index')
-            return redirect('hstl:root_index')
+            else:
+                content['form'] = RoomDetail()
+            return render(request, 'root/newRoom.html', content)
         else:
             return redirect('hstl:index')
 
-    def infoRoom(request):
+    def infoRoom(request, room_id):
         content = {}
-        if request.user.is_superuser:
+        try:
+            room = Room.objects.get(pk=room_id)
+        except Room.DoesNotExist:
+            room = None
+        content['room'] = room
+        if request.user.is_superuser and room is not None:
             if request.method == 'POST':
+                content['form'] = RoomDetail(request.POST, instance=room)
+                if content['form'].is_valid():
+                    content['form'].save()
                     return redirect('hstl:root_index')
-            return redirect('hstl:root_index')
+            else:
+                content['form'] = RoomDetail(instance=room)
+            return render(request, 'root/infoRoom.html', content)
         else:
-            return redirect('hstl:index')
+            return redirect('hstl:root_index')
 
 
 class StudentR:

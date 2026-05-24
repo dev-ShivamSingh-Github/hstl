@@ -138,7 +138,7 @@
                         <td>{{ forloop.counter }}</td>
                         <td><strong>{{ r.room_number }}</strong></td>
                         <td>{{ r.get_room_type_display }}</td>
-                        <td><a href="{% url 'hstl:info_room' %}">ℹ️</a></td>
+                        <td><a href="{% url 'hstl:info_room' r.id %}">ℹ️</a></td>
                     </tr>
                     {% endfor %}
                 </tbody>

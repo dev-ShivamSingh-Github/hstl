@@ -180,6 +180,14 @@ class Room(models.Model):
         help_text='Price of the Room',
         validators=[validate_price]
     )
+    def save(self, *args, **kwargs):
+        is_new = self.pk is None
+        super().save(*args, **kwargs)
+        if is_new:
+            num_beds = int(self.room_type[1])
+            for _ in range(num_beds):
+                Bed.objects.create(room=self)
+
     def __str__(self):
         return f"Room"
 
