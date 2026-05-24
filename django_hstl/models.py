@@ -181,7 +181,7 @@ class Room(models.Model):
         validators=[validate_price]
     )
     def __str__(self):
-        return f"{self.room_number}::{self.get_room_type_display()}"
+        return f"Room"
 
 
 class Bed(models.Model):
@@ -245,7 +245,7 @@ class Fee(models.Model):
     )'''
 
     def __str__(self):
-        return f"Invoice {self.id} | {self.bed.myuser.name} | {self.get_status_display()}"
+        return f"Invoice"
 
 
 class Complaint(models.Model):
@@ -279,6 +279,7 @@ class Complaint(models.Model):
         help_text='Status of Complaint'
     )
     description = models.TextField(
+        max_length=500,
         verbose_name='Description',
         help_text='Please tell us more about issue'
     )
@@ -291,10 +292,11 @@ class Complaint(models.Model):
     admin_remarks = models.TextField(
         blank=True,
         null=True,
+        max_length=500,
         verbose_name='Admin Rmarks',
         help_text='Admin remark on Complaint'
     )
     
     def __str__(self):
-        return f"{self.get_category_display()} Issue - {self.bed.myuser.name} ({self.get_status_display()})"
+        return f"Complaint"
 

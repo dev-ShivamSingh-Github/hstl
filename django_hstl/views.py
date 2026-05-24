@@ -1,7 +1,7 @@
 from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import render, redirect
 from .forms import UserLogin, NewMember, MemberDetail
-from .models import MyUser
+from .models import MyUser, Room
 
 def auth_response(request, content,  key, val):
     user = authenticate(username = key, password = val)
@@ -41,6 +41,7 @@ class RootR:
             content['student'] = MyUser.objects.get_student()
             content['staff'] = MyUser.objects.get_staff()
             content['inactive'] = MyUser.objects.get_inactive()
+            content['room'] = Room.objects.all()
             return render(request, 'root/index.html', content)
         else:
             request.session.flush()
@@ -111,6 +112,24 @@ class RootR:
             return render(request, 'root/infoStaff.html', content)
         else:
             return redirect('hstl:root_index')
+
+    def newRoom(request):
+        content = {}
+        if request.user.is_superuser:
+            if request.method == 'POST':
+                    return redirect('hstl:root_index')
+            return redirect('hstl:root_index')
+        else:
+            return redirect('hstl:index')
+
+    def infoRoom(request):
+        content = {}
+        if request.user.is_superuser:
+            if request.method == 'POST':
+                    return redirect('hstl:root_index')
+            return redirect('hstl:root_index')
+        else:
+            return redirect('hstl:index')
 
 
 class StudentR:
