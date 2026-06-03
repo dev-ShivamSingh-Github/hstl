@@ -3,12 +3,6 @@
 {% block static %}
 {% endblock static %}
 {% block content %}
-<h1>
-	<a href="{% url 'hstl:root_index' %}">
-		🔙
-	</a>
-	to home
-</h1>
 {% if room %}
 	{% if form %}
 	<form id="infoRoom" action="{{ request.path }}" method="POST" autocomplete="off">
@@ -31,3 +25,20 @@
 	:(
 {% endif %}
 {% endblock content %}
+{% block footer %}
+  <div>
+    <a href="{% url 'hstl:root_index' %}">🏠<br>
+      <p>Home</p>
+    </a>
+  </div>
+  <div>
+    <a href="{% url 'hstl:root_index' %}">🏠<br>
+      <p>Home</p>
+    </a>
+  </div>
+  <div>
+    <a href="{% url 'hstl:root_index' %}">🏠<br>
+      <p>Home</p>
+    </a>
+  </div>
+{% endblock footer %}

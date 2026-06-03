@@ -20,5 +20,17 @@
 {% else %}
 ❌
 {% endif %}
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 {% endblock content %}
-{% block footer %}{% endblock footer %}
+{% block footer %}
+  <div>
+    <a href="{% url 'hstl:index' %}">🔑<br>
+      <p>Forget Password?</p>
+    </a>
+  </div>
+  <div>
+    <a href="{% url 'hstl:index' %}">🔐<br>
+      <p>Login</p>
+    </a>
+  </div>
+{% endblock footer %}

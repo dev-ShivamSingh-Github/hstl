@@ -3,7 +3,7 @@
 {% block static %}
 {% load static %}
 <link rel="stylesheet" href="{% static 'root/style.css' %}">
-<script type="text/javascript" src="{% static 'root/script.js' %}"></script>
+<script defer type="text/javascript" src="{% static 'root/script.js' %}"></script>
 {% endblock static %}
 {% block content %}
 <div class="main">
@@ -150,3 +150,20 @@
     </div>
 </div>
 {% endblock content %}
+{% block footer %}
+  <div>
+    <a href="{% url 'hstl:root_index' %}">🏠<br>
+      <p>Home</p>
+    </a>
+  </div>
+  <div>
+    <a href="{% url 'hstl:root_index' %}">🏠<br>
+      <p>Home</p>
+    </a>
+  </div>
+  <div>
+    <a href="{% url 'hstl:root_index' %}">🏠<br>
+      <p>Home</p>
+    </a>
+  </div>
+{% endblock footer %}

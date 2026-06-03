@@ -153,7 +153,7 @@ header, footer{
 	padding: 7px 14px;
 	backdrop-filter: blur(12px);
 	justify-content: space-between;
-	box-shadow: 0px 20px 20px 0px rgba(0, 0, 0, 0.5);
+	box-shadow: 0px 0px 20px 10px rgba(0, 0, 0, 0.5);
 	background-color: color-mix(in srgb, canvastext, transparent 90%);
 	border-top: 1px solid color-mix(in srgb, canvastext, transparent 50%);
 	border-bottom: 1px solid color-mix(in srgb, canvastext, transparent 50%);

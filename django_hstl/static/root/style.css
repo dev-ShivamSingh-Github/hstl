@@ -1,9 +1,8 @@
 :root {
     --accent-std: #00b4d8;
-	--accent-stf: #7209b7;
+    --accent-stf: #7209b7;
     --accent-inactive: #d70707;
     --accent-room: #b5cf22cc;
-	--bg-card: color-mix(in srgb, canvas, gray 3%);
     --border-soft: color-mix(in srgb, canvastext, transparent 92%);
 }
 
@@ -12,22 +11,16 @@
     display: flex;
     flex-direction: column;
     gap: 30px;
-	padding: 20px;
-    width: 100%;
-    /* Removed min-height: 100vh to stop vertical ghost space */
-    background-color: canvas;
+    padding: 10px;
 }
 
 /* 2. Card Styling */
 #std, #stf, #inactive, #room{
     width: 100%;
-    /* max-width: 900px; */
-    background: var(--bg-card);
+    overflow: hidden;
     border-radius: 16px;
     border: 1px solid var(--border-soft);
-    /*box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);*/
     box-shadow: 0px 2px 20px 10px rgba(0, 0, 0, 0.5);
-    overflow: hidden;
 }
 
 #std { border-top: 5px solid var(--accent-std); }
@@ -45,19 +38,17 @@
 
 .mainInfo a {
     text-decoration: none;
-    font-size: 1.4rem;
+    font-size: 1.5rem;
     background: canvas;
-    width: 40px;
-    height: 40px;
-    display: flex;
-    justify-content: center;
+    width: 50px;
+    height: 50px;
     border-radius: 50%;
     box-shadow: 0 4px 10px rgba(0,0,0,0.1);
     transition: all 0.2s ease;
 }
 
 .mainInfo a:hover {
-    transform: scale(1.1) rotate(90deg);
+    transform: scale(1.25) rotate(90deg);
 }
 
 /* 4. Scrollable Table Logic */
