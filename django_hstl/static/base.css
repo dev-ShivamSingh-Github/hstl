@@ -17,12 +17,12 @@ form {
 	padding: 20px;
 	background: color-mix(in srgb, canvas, gray 10%);
 	border-radius: 16px;
-	border: 2px solid color-mix(in srgb, canvastext, transparent 86%); 
+	border: 2px solid color-mix(in srgb, canvastext, transparent 86%);
 	box-shadow: 0px 0px 35px 0px rgba(0.1, 0.1, 0.1, 1.0);
 
 	/* 2. Grid Logic */
 	@media (min-width: 900px) {
-		div {		
+		div {
 			display: grid;
 			grid-template-columns: 1fr 4fr;
 			gap: 15px;
@@ -67,11 +67,10 @@ form {
 	input:not([type="submit"]),
 	select,
 	textarea {
-		appearance: none; 
+		appearance: none;
 		padding: 15px 20px;
-		background: canvas; 
-		border: 2px solid color-mix(in srgb, canvastext, transparent 80%); 
-		-webkit-user-select: text;
+		background: canvas;
+		border: 2px solid color-mix(in srgb, canvastext, transparent 80%);
 		transition: all 0.25s ease;
 		color: canvastext;
 	}
@@ -148,10 +147,12 @@ footer{
 }
 header, footer{
 	form{all: unset;}
+	left: 0;
 	display: flex;
-	position: sticky;
+	position: fixed;
 	padding: 7px 14px;
 	backdrop-filter: blur(12px);
+	width: -webkit-fill-available;
 	justify-content: space-between;
 	box-shadow: 0px 0px 20px 10px rgba(0, 0, 0, 0.5);
 	background-color: color-mix(in srgb, canvastext, transparent 90%);
