@@ -23,13 +23,27 @@
 <script></script>
 {% block static %}{% endblock static %}
 </head><body>
+<header>
+  <div>
+    HSTL - xyz Hostel
+  </div>
+  {% if request.user.is_authenticated %}
+  <div>
+    <form id="logout" action="{% url 'hstl:logout' %}" method="POST">
+      {% csrf_token %}
+      <label for="logout">
+        <input type="submit" value="&nbsp;&nbsp;&nbsp;&nbsp;➜]&nbsp;&nbsp;&nbsp;&nbsp;" id="logout">
+      </label>
+    </form>
+  </div>
+  {% else %}
+  <div><p>Please Login</p></div>
+  {% endif %}
+</header>
+<br><br><br><br><br>
 {% block content %}{% endblock content %}
-{% block footer %}
+<br><br><br><br><br>
 <footer>
-  <form id="logout" action="{% url 'hstl:logout' %}" method="POST">
-    {% csrf_token %}
-    <input type="submit" value="Logout">
-  </form>
+{% block footer %}{% endblock footer %}
 </footer>
-{% endblock footer %}
 </body></html>
