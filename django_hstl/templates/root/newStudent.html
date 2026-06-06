@@ -4,18 +4,10 @@
 {% endblock static %}
 {% block content %}
 {% if form %}
-<form action="{{ request.path }}" method="POST" autocomplete="off">
-	{% csrf_token %}
-	{{ form.non_field_errors }}
-	{% for field in form %}
-	<div>
-		{{ field.label_tag }}
-		{{ field }}
-	</div>
-	{{ field.errors }}
-	{% endfor %}
-	<br><br>
-	<input type="submit" value="Add">
+<form id="newStudent" action="{{ request.path }}" method="POST" autocomplete="off">
+  {% csrf_token %}
+  {{ form.as_div }}
+  <input type="submit" value="Add">
 </form>
 {% else %}
 ❌
