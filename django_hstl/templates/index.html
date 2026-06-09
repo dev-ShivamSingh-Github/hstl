@@ -6,15 +6,7 @@
 {% if form %}
 <form id="login" action="{{ request.path }}" method="POST" autocomplete="off">
 	{% csrf_token %}
-	{{ form.non_field_errors }}
-	{% for field in form %}
-	<div>
-		{{ field.label_tag }}
-		{{ field }}
-	</div>
-	{{ field.errors }}
-	{% endfor %}
-	<br><br>
+	{{ form.as_div }}
 	<input type="submit" value="Login">
 </form>
 {% else %}

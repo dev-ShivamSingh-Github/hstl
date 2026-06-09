@@ -31,9 +31,7 @@
   <div>
     <form id="logout" action="{% url 'hstl:logout' %}" method="POST">
       {% csrf_token %}
-      <label for="logout">
-        <input type="submit" value="&nbsp;&nbsp;&nbsp;&nbsp;➜]&nbsp;&nbsp;&nbsp;&nbsp;" id="logout">
-      </label>
+      <input type="submit" value="&nbsp;&nbsp;&nbsp;&nbsp;➜]&nbsp;&nbsp;&nbsp;&nbsp;" id="logout">
     </form>
   </div>
   {% else %}
