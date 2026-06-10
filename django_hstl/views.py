@@ -62,6 +62,8 @@ def index(request):
             return redirect('hstl:student_index')
 
     content = {}
+    from importlib.metadata import version
+    content['version'] = version('django-hstl')
     if request.method == 'POST':
         content['form'] = UserLogin(request.POST)
         if content['form'].is_valid():
