@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block title %}Update Complaint{% endblock title %}
+{% block static %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'staff/style.css' %}">
+{% endblock static %}
+{% block content %}
+{% if complaint %}
+    <h2 style="text-align: center; margin-top: 20px;">Complaint for {{ complaint.student.name }}</h2>
+    <p style="text-align: center;"><strong>Description:</strong> {{ complaint.description }}</p>
+{% endif %}
+{% if form %}
+<form action="{{ request.path }}" method="POST" autocomplete="off">
+	{% csrf_token %}
+	{{ form.as_div }}
+	<input type="submit" value="Update Complaint">
+</form>
+{% else %}
+❌
+{% endif %}
+{% endblock content %}
+{% block footer %}
+  <div>
+    <a href="{% url 'hstl:staff_index' %}">🏠<br>
+      <p>Home</p>
+    </a>
+  </div>
+  <div>
+    <a href="{% url 'hstl:staff_complaints' %}">📋<br>
+      <p>Complaints</p>
+    </a>
+  </div>
+  <div>
+    <a href="{% url 'hstl:staff_index' %}">🏠<br>
+      <p>Home</p>
+    </a>
+  </div>
+{% endblock footer %}

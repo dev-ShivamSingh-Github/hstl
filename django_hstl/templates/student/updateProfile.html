@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block title %}Update Profile{% endblock title %}
+{% block static %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'student/style.css' %}">
+{% endblock static %}
+{% block content %}
+{% if form %}
+<form action="{{ request.path }}" method="POST" autocomplete="off">
+	{% csrf_token %}
+	{{ form.as_div }}
+	<br><br>
+	<input type="submit" value="Update Profile">
+</form>
+{% else %}
+❌
+{% endif %}
+{% endblock content %}
+{% block footer %}
+  <div>
+    <a href="{% url 'hstl:student_index' %}">🏠<br>
+      <p>Home</p>
+    </a>
+  </div>
+  <div>
+    <a href="{% url 'hstl:student_index' %}">🏠<br>
+      <p>Home</p>
+    </a>
+  </div>
+  <div>
+    <a href="{% url 'hstl:student_index' %}">🏠<br>
+      <p>Home</p>
+    </a>
+  </div>
+{% endblock footer %}

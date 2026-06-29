@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% block title %}Log Visitor{% endblock title %}
+{% block static %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'staff/style.css' %}">
+{% endblock static %}
+{% block content %}
+{% if form %}
+<form action="{{ request.path }}" method="POST" autocomplete="off">
+	{% csrf_token %}
+	{{ form.as_div }}
+	<input type="submit" value="Log Visitor">
+</form>
+{% else %}
+❌
+{% endif %}
+{% endblock content %}
+{% block footer %}
+  <div>
+    <a href="{% url 'hstl:staff_index' %}">🏠<br>
+      <p>Home</p>
+    </a>
+  </div>
+  <div>
+    <a href="{% url 'hstl:staff_visitors' %}">👥<br>
+      <p>Visitors</p>
+    </a>
+  </div>
+  <div>
+    <a href="{% url 'hstl:staff_index' %}">🏠<br>
+      <p>Home</p>
+    </a>
+  </div>
+{% endblock footer %}

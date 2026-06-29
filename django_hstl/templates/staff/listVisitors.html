@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+{% block title %}Visitors Log{% endblock title %}
+{% block static %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'staff/style.css' %}">
+{% endblock static %}
+{% block content %}
+<div class="main">
+    <div id="visitors-card" class="card">
+        <div class="mainInfo">
+            <h1>Visitors Log</h1>
+            <a href="{% url 'hstl:staff_log_visitor' %}">➕</a>
+        </div>
+
+        {% if visitors %}
+            <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Visitor Name</th>
+                        <th>Relation</th>
+                        <th>Student Visited</th>
+                        <th>Check-In Time</th>
+                        <th>Check-Out Time</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for v in visitors %}
+                    <tr>
+                        <td>{{ forloop.counter }}</td>
+                        <td>{{ v.visitor_name }}</td>
+                        <td>{{ v.relation }}</td>
+                        <td>{{ v.student.name }}</td>
+                        <td>{{ v.check_in }}</td>
+                        <td>{{ v.check_out|default:"Not Checked Out" }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            </div>
+        {% else %}
+            <h3 style="padding: 20px;">No visitors logged yet. Click ➕ to log a visitor.</h3>
+        {% endif %}
+    </div>
+</div>
+{% endblock content %}
+{% block footer %}
+  <div>
+    <a href="{% url 'hstl:staff_index' %}">🏠<br>
+      <p>Home</p>
+    </a>
+  </div>
+  <div>
+    <a href="{% url 'hstl:staff_index' %}">🏠<br>
+      <p>Home</p>
+    </a>
+  </div>
+  <div>
+    <a href="{% url 'hstl:staff_index' %}">🏠<br>
+      <p>Home</p>
+    </a>
+  </div>
+{% endblock footer %}

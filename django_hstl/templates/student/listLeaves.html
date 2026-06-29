@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+{% block title %}My Leaves{% endblock title %}
+{% block static %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'student/style.css' %}">
+{% endblock static %}
+{% block content %}
+<div class="main">
+    <div id="leaves-card" class="card">
+        <div class="mainInfo">
+            <h1>My Leave Requests</h1>
+            <a href="{% url 'hstl:student_new_leave' %}">➕</a>
+        </div>
+
+        {% if leaves %}
+            <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Departure Date</th>
+                        <th>Return Date</th>
+                        <th>Reason</th>
+                        <th>Status</th>
+                        <th>Approved By</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for l in leaves %}
+                    <tr>
+                        <td>{{ forloop.counter }}</td>
+                        <td>{{ l.departure_date }}</td>
+                        <td>{{ l.return_date }}</td>
+                        <td>{{ l.reason }}</td>
+                        <td><strong>{{ l.get_status_display }}</strong></td>
+                        <td>{{ l.approved_by|default:"-" }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            </div>
+        {% else %}
+            <h3 style="padding: 20px;">No leave requests found. Click ➕ to request a leave.</h3>
+        {% endif %}
+    </div>
+</div>
+{% endblock content %}
+{% block footer %}
+  <div>
+    <a href="{% url 'hstl:student_index' %}">🏠<br>
+      <p>Home</p>
+    </a>
+  </div>
+  <div>
+    <a href="{% url 'hstl:student_index' %}">🏠<br>
+      <p>Home</p>
+    </a>
+  </div>
+  <div>
+    <a href="{% url 'hstl:student_index' %}">🏠<br>
+      <p>Home</p>
+    </a>
+  </div>
+{% endblock footer %}

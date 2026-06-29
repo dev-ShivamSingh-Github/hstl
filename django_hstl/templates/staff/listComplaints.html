@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+{% block title %}Complaints{% endblock title %}
+{% block static %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'staff/style.css' %}">
+{% endblock static %}
+{% block content %}
+<div class="main">
+    <div id="complaints-card" class="card">
+        <div class="mainInfo">
+            <h1>All Complaints</h1>
+        </div>
+
+        {% if complaints %}
+            <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Student</th>
+                        <th>Category</th>
+                        <th>Description</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for c in complaints %}
+                    <tr>
+                        <td>{{ forloop.counter }}</td>
+                        <td>{{ c.student.name }}</td>
+                        <td>{{ c.get_category_display }}</td>
+                        <td>{{ c.description }}</td>
+                        <td><strong>{{ c.get_status_display }}</strong></td>
+                        <td><a href="{% url 'hstl:staff_update_complaint' c.id %}">Update</a></td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            </div>
+        {% else %}
+            <h3 style="padding: 20px;">No complaints found.</h3>
+        {% endif %}
+    </div>
+</div>
+{% endblock content %}
+{% block footer %}
+  <div>
+    <a href="{% url 'hstl:staff_index' %}">🏠<br>
+      <p>Home</p>
+    </a>
+  </div>
+  <div>
+    <a href="{% url 'hstl:staff_index' %}">🏠<br>
+      <p>Home</p>
+    </a>
+  </div>
+  <div>
+    <a href="{% url 'hstl:staff_index' %}">🏠<br>
+      <p>Home</p>
+    </a>
+  </div>
+{% endblock footer %}

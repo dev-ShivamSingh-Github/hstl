@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block title %}New Invoice{% endblock title %}
+{% block static %}
+{% endblock static %}
+{% block content %}
+{% if form %}
+<form id="newInvoice" action="{{ request.path }}" method="POST" autocomplete="off">
+  {% csrf_token %}
+  {{ form.as_div }}
+  <input type="submit" value="Record Invoice">
+</form>
+{% else %}
+❌
+{% endif %}
+{% endblock content %}
+{% block footer %}
+  <div>
+    <a href="{% url 'hstl:root_index' %}">🏠<br>
+      <p>Home</p>
+    </a>
+  </div>
+  <div>
+    <a href="{% url 'hstl:list_invoices' %}">📄<br>
+      <p>Invoices</p>
+    </a>
+  </div>
+  <div>
+    <a href="{% url 'hstl:root_index' %}">🏠<br>
+      <p>Home</p>
+    </a>
+  </div>
+{% endblock footer %}

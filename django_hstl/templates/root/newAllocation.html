@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block title %}New Allocation{% endblock title %}
+{% block static %}
+{% endblock static %}
+{% block content %}
+{% if form %}
+<form action="{{ request.path }}" method="POST" autocomplete="off">
+	{% csrf_token %}
+	{{ form.as_div }}
+	<br><br>
+	<input type="submit" value="Allocate Bed">
+</form>
+{% else %}
+❌
+{% endif %}
+{% endblock content %}
+{% block footer %}
+  <div>
+    <a href="{% url 'hstl:root_index' %}">🏠<br>
+      <p>Home</p>
+    </a>
+  </div>
+  <div>
+    <a href="{% url 'hstl:list_allocations' %}">🛏️<br>
+      <p>Allocations</p>
+    </a>
+  </div>
+  <div>
+    <a href="{% url 'hstl:root_index' %}">🏠<br>
+      <p>Home</p>
+    </a>
+  </div>
+{% endblock footer %}

@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+{% block title %}My Invoices{% endblock title %}
+{% block static %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'student/style.css' %}">
+{% endblock static %}
+{% block content %}
+<div class="main">
+    <div id="invoices-card" class="card">
+        <div class="mainInfo">
+            <h1>My Invoices</h1>
+        </div>
+
+        {% if invoices %}
+            <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Title</th>
+                        <th>Amount</th>
+                        <th>Due Date</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for i in invoices %}
+                    <tr>
+                        <td>{{ forloop.counter }}</td>
+                        <td><strong>{{ i.title }}</strong></td>
+                        <td>₹{{ i.amount }}</td>
+                        <td>{{ i.due_date }}</td>
+                        <td>{{ i.get_status_display }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            </div>
+        {% else %}
+            <h3 style="padding: 20px;">No invoices found.</h3>
+        {% endif %}
+    </div>
+</div>
+{% endblock content %}
+{% block footer %}
+  <div>
+    <a href="{% url 'hstl:student_index' %}">🏠<br>
+      <p>Home</p>
+    </a>
+  </div>
+  <div>
+    <a href="{% url 'hstl:student_index' %}">🏠<br>
+      <p>Home</p>
+    </a>
+  </div>
+  <div>
+    <a href="{% url 'hstl:student_index' %}">🏠<br>
+      <p>Home</p>
+    </a>
+  </div>
+{% endblock footer %}

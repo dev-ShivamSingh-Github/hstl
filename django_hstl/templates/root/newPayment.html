@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block title %}Record Payment{% endblock title %}
+{% block static %}
+{% endblock static %}
+{% block content %}
+{% if invoice %}
+    <h2 style="text-align: center; margin-top: 20px;">Invoice for {{ invoice.student.name }} - Amount: ₹{{ invoice.amount }}</h2>
+{% endif %}
+{% if form %}
+<form id="newPayment" action="{{ request.path }}" method="POST" autocomplete="off">
+  {% csrf_token %}
+  {{ form.as_div }}
+  <input type="submit" value="Record Payment">
+</form>
+{% else %}
+❌
+{% endif %}
+{% endblock content %}
+{% block footer %}
+  <div>
+    <a href="{% url 'hstl:root_index' %}">🏠<br>
+      <p>Home</p>
+    </a>
+  </div>
+  <div>
+    <a href="{% url 'hstl:list_invoices' %}">📄<br>
+      <p>Invoices</p>
+    </a>
+  </div>
+  <div>
+    <a href="{% url 'hstl:root_index' %}">🏠<br>
+      <p>Home</p>
+    </a>
+  </div>
+{% endblock footer %}

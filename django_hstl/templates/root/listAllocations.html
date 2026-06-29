@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+{% block title %}Allocations{% endblock title %}
+{% block static %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'root/style.css' %}">
+{% endblock static %}
+{% block content %}
+<div class="main">
+    <div id="room">
+        <div class="mainInfo">
+            <h1>Bed Allocations</h1>
+            <a href="{% url 'hstl:new_allocation' %}">➕</a>
+        </div>
+
+        {% if allocations %}
+            <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Student</th>
+                        <th>Hostel & Room</th>
+                        <th>Bed</th>
+                        <th>Start Date</th>
+                        <th>End Date</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for a in allocations %}
+                    <tr>
+                        <td>{{ forloop.counter }}</td>
+                        <td><strong>{{ a.student.name }}</strong></td>
+                        <td>{{ a.bed.room.hostel.code }} - {{ a.bed.room.room_number }}</td>
+                        <td>Bed #{{ a.bed.id }}</td>
+                        <td>{{ a.start_date }}</td>
+                        <td>{{ a.end_date|default:"-" }}</td>
+                        <td>{{ a.get_status_display }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            </div>
+        {% else %}
+            <h3>No Allocations found. Click ➕ to add.</h3>
+        {% endif %}
+    </div>
+</div>
+{% endblock content %}
+{% block footer %}
+  <div>
+    <a href="{% url 'hstl:root_index' %}">🏠<br>
+      <p>Home</p>
+    </a>
+  </div>
+  <div>
+    <a href="{% url 'hstl:root_index' %}">🏠<br>
+      <p>Home</p>
+    </a>
+  </div>
+  <div>
+    <a href="{% url 'hstl:root_index' %}">🏠<br>
+      <p>Home</p>
+    </a>
+  </div>
+{% endblock footer %}

@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% block title %}New Complaint{% endblock title %}
+{% block static %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'student/style.css' %}">
+{% endblock static %}
+{% block content %}
+{% if form %}
+<form action="{{ request.path }}" method="POST" autocomplete="off">
+	{% csrf_token %}
+	{{ form.as_div }}
+	<input type="submit" value="Submit Complaint">
+</form>
+{% else %}
+❌
+{% endif %}
+{% endblock content %}
+{% block footer %}
+  <div>
+    <a href="{% url 'hstl:student_index' %}">🏠<br>
+      <p>Home</p>
+    </a>
+  </div>
+  <div>
+    <a href="{% url 'hstl:student_complaints' %}">📋<br>
+      <p>Complaints</p>
+    </a>
+  </div>
+  <div>
+    <a href="{% url 'hstl:student_index' %}">🏠<br>
+      <p>Home</p>
+    </a>
+  </div>
+{% endblock footer %}

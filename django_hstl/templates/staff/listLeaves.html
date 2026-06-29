@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+{% block title %}Leave Requests{% endblock title %}
+{% block static %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'staff/style.css' %}">
+{% endblock static %}
+{% block content %}
+<div class="main">
+    <div id="leaves-card" class="card">
+        <div class="mainInfo">
+            <h1>Leave Requests</h1>
+        </div>
+
+        {% if leaves %}
+            <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Student</th>
+                        <th>Departure</th>
+                        <th>Return</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for l in leaves %}
+                    <tr>
+                        <td>{{ forloop.counter }}</td>
+                        <td>{{ l.student.name }}</td>
+                        <td>{{ l.departure_date }}</td>
+                        <td>{{ l.return_date }}</td>
+                        <td><strong>{{ l.get_status_display }}</strong></td>
+                        <td><a href="{% url 'hstl:staff_update_leave' l.id %}">Update</a></td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            </div>
+        {% else %}
+            <h3 style="padding: 20px;">No leave requests found.</h3>
+        {% endif %}
+    </div>
+</div>
+{% endblock content %}
+{% block footer %}
+  <div>
+    <a href="{% url 'hstl:staff_index' %}">🏠<br>
+      <p>Home</p>
+    </a>
+  </div>
+  <div>
+    <a href="{% url 'hstl:staff_index' %}">🏠<br>
+      <p>Home</p>
+    </a>
+  </div>
+  <div>
+    <a href="{% url 'hstl:staff_index' %}">🏠<br>
+      <p>Home</p>
+    </a>
+  </div>
+{% endblock footer %}

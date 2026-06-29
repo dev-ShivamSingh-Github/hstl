@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+{% block title %}Invoices{% endblock title %}
+{% block static %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'root/style.css' %}">
+{% endblock static %}
+{% block content %}
+<div class="main">
+    <div id="room">
+        <div class="mainInfo">
+            <h1>Invoices</h1>
+            <a href="{% url 'hstl:new_invoice' %}">➕</a>
+        </div>
+
+        {% if invoices %}
+            <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Student</th>
+                        <th>Title</th>
+                        <th>Amount</th>
+                        <th>Due Date</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for i in invoices %}
+                    <tr>
+                        <td>{{ forloop.counter }}</td>
+                        <td><strong>{{ i.student.name }}</strong></td>
+                        <td>{{ i.title }}</td>
+                        <td>₹{{ i.amount }}</td>
+                        <td>{{ i.due_date }}</td>
+                        <td>{{ i.get_status_display }}</td>
+                        <td>
+                            {% if i.status != 'F' %}
+                            <a href="{% url 'hstl:new_payment' i.id %}" style="background: var(--accent-std); color: white; padding: 5px 10px; border-radius: 5px; font-size: 0.9rem;">Record Payment</a>
+                            {% else %}
+                            Paid ✅
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            </div>
+        {% else %}
+            <h3>No Invoices found. Click ➕ to add.</h3>
+        {% endif %}
+    </div>
+</div>
+{% endblock content %}
+{% block footer %}
+  <div>
+    <a href="{% url 'hstl:root_index' %}">🏠<br>
+      <p>Home</p>
+    </a>
+  </div>
+  <div>
+    <a href="{% url 'hstl:root_index' %}">🏠<br>
+      <p>Home</p>
+    </a>
+  </div>
+  <div>
+    <a href="{% url 'hstl:root_index' %}">🏠<br>
+      <p>Home</p>
+    </a>
+  </div>
+{% endblock footer %}

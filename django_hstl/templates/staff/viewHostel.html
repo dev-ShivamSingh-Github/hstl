@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% block title %}View Hostel{% endblock title %}
+{% block static %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'staff/style.css' %}">
+{% endblock static %}
+{% block content %}
+<div class="main">
+    <div id="hostel-card" class="card">
+        <div class="mainInfo">
+            <h1>Assigned Hostel</h1>
+        </div>
+
+        {% if hostel %}
+            <div class="details-section">
+                <p><strong>Name:</strong> {{ hostel.name }} ({{ hostel.code }})</p>
+                <p><strong>Type:</strong> {{ hostel.get_gender_type_display }}</p>
+                <p><strong>Capacity:</strong> {{ hostel.capacity }}</p>
+            </div>
+        {% else %}
+            <h3 style="padding: 20px;">You are not assigned to any hostel.</h3>
+        {% endif %}
+    </div>
+</div>
+{% endblock content %}
+{% block footer %}
+  <div>
+    <a href="{% url 'hstl:staff_index' %}">🏠<br>
+      <p>Home</p>
+    </a>
+  </div>
+  <div>
+    <a href="{% url 'hstl:staff_index' %}">🏠<br>
+      <p>Home</p>
+    </a>
+  </div>
+  <div>
+    <a href="{% url 'hstl:staff_index' %}">🏠<br>
+      <p>Home</p>
+    </a>
+  </div>
+{% endblock footer %}

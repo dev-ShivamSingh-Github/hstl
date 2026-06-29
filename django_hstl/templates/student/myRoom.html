@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% block title %}My Room{% endblock title %}
+{% block static %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'student/style.css' %}">
+{% endblock static %}
+{% block content %}
+<div class="main">
+    <div id="room-card" class="card">
+        <div class="mainInfo">
+            <h1>My Room Allocation</h1>
+        </div>
+
+        {% if allocations %}
+            {% for a in allocations %}
+            <div class="details-section">
+                <p><strong>Hostel:</strong> {{ a.bed.room.hostel.name }} ({{ a.bed.room.hostel.code }})</p>
+                <p><strong>Room Number:</strong> {{ a.bed.room.room_number }}</p>
+                <p><strong>Room Type:</strong> {{ a.bed.room.get_room_type_display }}</p>
+                <p><strong>Bed Details:</strong> Bed #{{ a.bed.id }}</p>
+                <p><strong>Allocated On:</strong> {{ a.start_date }}</p>
+                <p><strong>Status:</strong> {{ a.get_status_display }}</p>
+            </div>
+            {% endfor %}
+        {% else %}
+            <h3 style="padding: 20px;">You do not have any active room allocations. Please contact the warden.</h3>
+        {% endif %}
+    </div>
+</div>
+{% endblock content %}
+{% block footer %}
+  <div>
+    <a href="{% url 'hstl:student_index' %}">🏠<br>
+      <p>Home</p>
+    </a>
+  </div>
+  <div>
+    <a href="{% url 'hstl:student_index' %}">🏠<br>
+      <p>Home</p>
+    </a>
+  </div>
+  <div>
+    <a href="{% url 'hstl:student_index' %}">🏠<br>
+      <p>Home</p>
+    </a>
+  </div>
+{% endblock footer %}

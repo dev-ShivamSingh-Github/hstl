@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block title %}Info Hostel{% endblock title %}
+{% block static %}
+{% endblock static %}
+{% block content %}
+{% if hostel %}
+{% if form %}
+<form id="infoHostel" action="{{ request.path }}" method="POST" autocomplete="off">
+	{% csrf_token %}
+	{{ form.as_div }}
+	<input type="submit" value="Change">
+</form>
+{% else %}
+	❌
+{% endif %}
+{% else %}
+	:(
+{% endif %}
+{% endblock content %}
+{% block footer %}
+  <div>
+    <a href="{% url 'hstl:root_index' %}">🏠<br>
+      <p>Home</p>
+    </a>
+  </div>
+  <div>
+    <a href="{% url 'hstl:root_index' %}">🏠<br>
+      <p>Home</p>
+    </a>
+  </div>
+  <div>
+    <a href="{% url 'hstl:root_index' %}">🏠<br>
+      <p>Home</p>
+    </a>
+  </div>
+{% endblock footer %}

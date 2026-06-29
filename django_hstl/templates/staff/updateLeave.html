@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block title %}Update Leave Request{% endblock title %}
+{% block static %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'staff/style.css' %}">
+{% endblock static %}
+{% block content %}
+{% if leave %}
+    <h2 style="text-align: center; margin-top: 20px;">Leave Request: {{ leave.student.name }}</h2>
+    <p style="text-align: center;"><strong>Reason:</strong> {{ leave.reason }}</p>
+    <p style="text-align: center;"><strong>Period:</strong> {{ leave.departure_date }} to {{ leave.return_date }}</p>
+{% endif %}
+{% if form %}
+<form action="{{ request.path }}" method="POST" autocomplete="off">
+	{% csrf_token %}
+	{{ form.as_div }}
+	<input type="submit" value="Update Leave Status">
+</form>
+{% else %}
+❌
+{% endif %}
+{% endblock content %}
+{% block footer %}
+  <div>
+    <a href="{% url 'hstl:staff_index' %}">🏠<br>
+      <p>Home</p>
+    </a>
+  </div>
+  <div>
+    <a href="{% url 'hstl:staff_leaves' %}">📅<br>
+      <p>Leaves</p>
+    </a>
+  </div>
+  <div>
+    <a href="{% url 'hstl:staff_index' %}">🏠<br>
+      <p>Home</p>
+    </a>
+  </div>
+{% endblock footer %}

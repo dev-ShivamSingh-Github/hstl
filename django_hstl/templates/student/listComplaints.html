@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+{% block title %}My Complaints{% endblock title %}
+{% block static %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'student/style.css' %}">
+{% endblock static %}
+{% block content %}
+<div class="main">
+    <div id="complaints-card" class="card">
+        <div class="mainInfo">
+            <h1>My Complaints</h1>
+            <a href="{% url 'hstl:student_new_complaint' %}">➕</a>
+        </div>
+
+        {% if complaints %}
+            <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Category</th>
+                        <th>Description</th>
+                        <th>Raised On</th>
+                        <th>Status</th>
+                        <th>Admin Remarks</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for c in complaints %}
+                    <tr>
+                        <td>{{ forloop.counter }}</td>
+                        <td>{{ c.get_category_display }}</td>
+                        <td>{{ c.description }}</td>
+                        <td>{{ c.raised_on }}</td>
+                        <td><strong>{{ c.get_status_display }}</strong></td>
+                        <td>{{ c.admin_remarks|default:"-" }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            </div>
+        {% else %}
+            <h3 style="padding: 20px;">No complaints filed yet. Click ➕ to file a complaint.</h3>
+        {% endif %}
+    </div>
+</div>
+{% endblock content %}
+{% block footer %}
+  <div>
+    <a href="{% url 'hstl:student_index' %}">🏠<br>
+      <p>Home</p>
+    </a>
+  </div>
+  <div>
+    <a href="{% url 'hstl:student_index' %}">🏠<br>
+      <p>Home</p>
+    </a>
+  </div>
+  <div>
+    <a href="{% url 'hstl:student_index' %}">🏠<br>
+      <p>Home</p>
+    </a>
+  </div>
+{% endblock footer %}

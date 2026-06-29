@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block title %}Staff Profile{% endblock title %}
+{% block static %}
+{% endblock static %}
+{% block content %}
+{% if staff %}
+    <h2 style="text-align: center; margin-top: 20px;">Staff Profile: {{ staff.name }}</h2>
+{% endif %}
+{% if form %}
+<form id="staffProfile" action="{{ request.path }}" method="POST" autocomplete="off">
+  {% csrf_token %}
+  {{ form.as_div }}
+  <input type="submit" value="Change">
+</form>
+{% else %}
+❌
+{% endif %}
+{% endblock content %}
+{% block footer %}
+  <div>
+    <a href="{% url 'hstl:root_index' %}">🏠<br>
+      <p>Home</p>
+    </a>
+  </div>
+  <div>
+    <a href="{% url 'hstl:root_index' %}">🏠<br>
+      <p>Home</p>
+    </a>
+  </div>
+  <div>
+    <a href="{% url 'hstl:root_index' %}">🏠<br>
+      <p>Home</p>
+    </a>
+  </div>
+{% endblock footer %}
