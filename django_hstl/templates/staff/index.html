@@ -1,12 +1,56 @@
 {% extends "base.html" %}
-{% block title %}Index_Staff{% endblock title %}
+{% block title %}Staff Dashboard{% endblock title %}
 {% block static %}
 {% load static %}
 <link rel="stylesheet" href="{% static 'staff/style.css' %}">
 <script type="text/javascript" src="{% static 'staff/script.js' %}"></script>
 {% endblock static %}
 {% block content %}
-{% if staff %}
-Hello {{ staff.name }}
-{% endif %}
+<div class="main">
+    <div id="staff-dashboard" class="card">
+        <div class="mainInfo">
+            <h1>Welcome, {{ staff.name }}!</h1>
+        </div>
+        
+        <div class="dashboard-grid">
+            <a href="{% url 'hstl:staff_update_profile' %}" class="dashboard-action">
+                <span class="icon">👤</span>
+                Update Profile
+            </a>
+            <a href="{% url 'hstl:staff_view_hostel' %}" class="dashboard-action">
+                <span class="icon">🏢</span>
+                Assigned Hostel
+            </a>
+            <a href="{% url 'hstl:staff_complaints' %}" class="dashboard-action">
+                <span class="icon">📋</span>
+                Manage Complaints
+            </a>
+            <a href="{% url 'hstl:staff_leaves' %}" class="dashboard-action">
+                <span class="icon">📅</span>
+                Leave Requests
+            </a>
+            <a href="{% url 'hstl:staff_visitors' %}" class="dashboard-action">
+                <span class="icon">👥</span>
+                Visitors Log
+            </a>
+        </div>
+    </div>
+</div>
 {% endblock content %}
+{% block footer %}
+  <div>
+    <a href="{% url 'hstl:staff_index' %}">🏠<br>
+      <p>Home</p>
+    </a>
+  </div>
+  <div>
+    <a href="{% url 'hstl:staff_index' %}">🏠<br>
+      <p>Home</p>
+    </a>
+  </div>
+  <div>
+    <a href="{% url 'hstl:staff_index' %}">🏠<br>
+      <p>Home</p>
+    </a>
+  </div>
+{% endblock footer %}

@@ -1,12 +1,56 @@
 {% extends "base.html" %}
-{% block title %}Index_Student{% endblock title %}
+{% block title %}Student Dashboard{% endblock title %}
 {% block static %}
 {% load static %}
 <link rel="stylesheet" href="{% static 'student/style.css' %}">
 <script type="text/javascript" src="{% static 'student/script.js' %}"></script>
 {% endblock static %}
 {% block content %}
-{% if student %}
-Hello {{ student.name }}
-{% endif %}
+<div class="main">
+    <div id="student-dashboard" class="card">
+        <div class="mainInfo">
+            <h1>Welcome, {{ student.name }}!</h1>
+        </div>
+        
+        <div class="dashboard-grid">
+            <a href="{% url 'hstl:student_update_profile' %}" class="dashboard-action">
+                <span class="icon">👤</span>
+                My Profile
+            </a>
+            <a href="{% url 'hstl:student_my_room' %}" class="dashboard-action">
+                <span class="icon">🛏️</span>
+                My Room
+            </a>
+            <a href="{% url 'hstl:student_my_invoices' %}" class="dashboard-action">
+                <span class="icon">📄</span>
+                My Invoices
+            </a>
+            <a href="{% url 'hstl:student_leaves' %}" class="dashboard-action">
+                <span class="icon">📅</span>
+                Leave Requests
+            </a>
+            <a href="{% url 'hstl:student_complaints' %}" class="dashboard-action">
+                <span class="icon">📋</span>
+                Complaints
+            </a>
+        </div>
+    </div>
+</div>
 {% endblock content %}
+{% block footer %}
+  <div>
+    <a href="{% url 'hstl:student_index' %}">🏠<br>
+      <p>Home</p>
+    </a>
+  </div>
+  <div>
+    <a href="{% url 'hstl:student_index' %}">🏠<br>
+      <p>Home</p>
+    </a>
+  </div>
+  <div>
+    <a href="{% url 'hstl:student_index' %}">🏠<br>
+      <p>Home</p>
+    </a>
+  </div>
+{% endblock footer %}

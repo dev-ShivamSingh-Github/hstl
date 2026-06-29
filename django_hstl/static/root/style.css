@@ -3,6 +3,11 @@
     --accent-stf: #7209b7;
     --accent-inactive: #d70707;
     --accent-room: #b5cf22cc;
+    --accent-hostel: #ff9f1c;
+    --accent-alloc: #2ec4b6;
+    --accent-inv: #e71d36;
+    --accent-comp: #ffbf69;
+    --accent-stats: #1e6091;
     --border-soft: color-mix(in srgb, canvastext, transparent 92%);
 }
 
@@ -15,7 +20,7 @@
 }
 
 /* 2. Card Styling */
-#std, #stf, #inactive, #room{
+#std, #stf, #inactive, #room, #hostel, #allocations, #invoices, #complaints, #stats {
     width: 100%;
     overflow: hidden;
     border-radius: 16px;
@@ -27,6 +32,12 @@
 #stf { border-top: 5px solid var(--accent-stf); }
 #inactive { border-top: 5px solid var(--accent-inactive); }
 #room { border-top: 5px solid var(--accent-room); }
+#hostel { border-top: 5px solid var(--accent-hostel); }
+#allocations { border-top: 5px solid var(--accent-alloc); }
+#invoices { border-top: 5px solid var(--accent-inv); }
+#complaints { border-top: 5px solid var(--accent-comp); }
+#stats { border-top: 5px solid var(--accent-stats); }
+
 
 /* 3. Header Section */
 .mainInfo {
@@ -82,4 +93,55 @@ tr:hover {
 }
 td:hover {
     background: color-mix(in srgb, canvastext, transparent 85%);
+}
+
+.card {
+    width: 100%;
+    overflow: hidden;
+    border-radius: 16px;
+    border: 1px solid var(--border-soft);
+    box-shadow: 0px 4px 25px rgba(0, 0, 0, 0.15);
+    border-top: 5px solid var(--accent-staff);
+    background: color-mix(in srgb, canvas, transparent 5%);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card:hover {
+    box-shadow: 0px 8px 30px rgba(114, 9, 183, 0.2);
+}
+
+/* Dashboard Grid Styles */
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    padding: 20px;
+}
+
+.dashboard-action {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 25px 15px;
+    background: color-mix(in srgb, canvas, transparent 5%);
+    border: 1px solid var(--border-soft);
+    border-radius: 12px;
+    text-decoration: none;
+    color: canvastext;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
+    font-size: 1.1rem;
+    font-weight: 500;
+}
+
+.dashboard-action:hover {
+    transform: translateY(-5px);
+    box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.2);
+    /* The color gets set dynamically by the parent specific accent variable if applied */
+}
+
+.dashboard-action .icon {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
 }

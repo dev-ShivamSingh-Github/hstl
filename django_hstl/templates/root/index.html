@@ -7,6 +7,37 @@
 {% endblock static %}
 {% block content %}
 <div class="main">
+    <div id="stats">
+        <div class="mainInfo">
+            <h1>At a Glance</h1>
+        </div>
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Students</th>
+                        <th>Staff</th>
+                        <th>Hostels</th>
+                        <th>Rooms</th>
+                        <th>Active Allocations</th>
+                        <th>Unpaid Invoices</th>
+                        <th>Pending Complaints</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>{{ stats.total_students }}</strong></td>
+                        <td><strong>{{ stats.total_staff }}</strong></td>
+                        <td><strong>{{ stats.total_hostels }}</strong></td>
+                        <td><strong>{{ stats.total_rooms }}</strong></td>
+                        <td><strong>{{ stats.active_allocations }}</strong></td>
+                        <td><strong>{{ stats.unpaid_invoices }}</strong></td>
+                        <td><strong>{{ stats.pending_complaints }}</strong></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
     <div id="std">
         <div class="mainInfo">
             <h1>Student</h1>
@@ -146,6 +177,117 @@
             </div>
         {% else %}
             <h3>No Rooms found. Click ➕ to add.</h3>
+        {% endif %}
+    </div>
+    <div id="hostel">
+        <div class="mainInfo">
+            <h1>Hostels</h1>
+            <a href="{% url 'hstl:new_hostel' %}">➕</a>
+        </div>
+        {% if hostel %}
+            <div class="table-container">
+            <table>
+                <thead>
+                    <tr><th>#</th><th>Name</th><th>Code</th><th>Type</th><th>Info</th></tr>
+                </thead>
+                <tbody>
+                    {% for h in hostel %}
+                    <tr>
+                        <td>{{ forloop.counter }}</td>
+                        <td><strong>{{ h.name }}</strong></td>
+                        <td>{{ h.code }}</td>
+                        <td>{{ h.get_gender_type_display }}</td>
+                        <td><a href="{% url 'hstl:info_hostel' h.id %}">ℹ️</a></td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            </div>
+        {% else %}
+            <h3 style="padding: 20px;">No Hostels found. Click ➕ to add.</h3>
+        {% endif %}
+    </div>
+
+    <div id="allocations">
+        <div class="mainInfo">
+            <h1>Allocations</h1>
+            <a href="{% url 'hstl:new_allocation' %}">➕</a>
+        </div>
+        {% if allocations %}
+            <div class="table-container">
+            <table>
+                <thead>
+                    <tr><th>#</th><th>Student</th><th>Room</th><th>Status</th></tr>
+                </thead>
+                <tbody>
+                    {% for a in allocations %}
+                    <tr>
+                        <td>{{ forloop.counter }}</td>
+                        <td><strong>{{ a.student.name }}</strong></td>
+                        <td>{{ a.room.room_number }}</td>
+                        <td>{{ a.get_status_display }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            </div>
+        {% else %}
+            <h3 style="padding: 20px;">No Allocations found. Click ➕ to add.</h3>
+        {% endif %}
+    </div>
+
+    <div id="invoices">
+        <div class="mainInfo">
+            <h1>Invoices</h1>
+            <a href="{% url 'hstl:new_invoice' %}">➕</a>
+        </div>
+        {% if invoices %}
+            <div class="table-container">
+            <table>
+                <thead>
+                    <tr><th>#</th><th>Student</th><th>Amount</th><th>Status</th></tr>
+                </thead>
+                <tbody>
+                    {% for i in invoices %}
+                    <tr>
+                        <td>{{ forloop.counter }}</td>
+                        <td><strong>{{ i.student.name }}</strong></td>
+                        <td>{{ i.amount }}</td>
+                        <td><strong>{{ i.get_status_display }}</strong></td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            </div>
+        {% else %}
+            <h3 style="padding: 20px;">No Invoices found. Click ➕ to add.</h3>
+        {% endif %}
+    </div>
+
+    <div id="complaints">
+        <div class="mainInfo">
+            <h1>Complaints</h1>
+        </div>
+        {% if complaints %}
+            <div class="table-container">
+            <table>
+                <thead>
+                    <tr><th>#</th><th>Student</th><th>Category</th><th>Status</th></tr>
+                </thead>
+                <tbody>
+                    {% for c in complaints %}
+                    <tr>
+                        <td>{{ forloop.counter }}</td>
+                        <td><strong>{{ c.student.name }}</strong></td>
+                        <td>{{ c.get_category_display }}</td>
+                        <td><strong>{{ c.get_status_display }}</strong></td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            </div>
+        {% else %}
+            <h3 style="padding: 20px;">No Complaints found.</h3>
         {% endif %}
     </div>
 </div>

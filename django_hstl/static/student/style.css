@@ -1,0 +1,153 @@
+:root {
+    --accent-student: #3a86ff;
+    --border-soft: color-mix(in srgb, canvastext, transparent 92%);
+}
+
+.main {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    padding: 10px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.card {
+    width: 100%;
+    overflow: hidden;
+    border-radius: 16px;
+    border: 1px solid var(--border-soft);
+    box-shadow: 0px 4px 25px rgba(0, 0, 0, 0.15);
+    border-top: 5px solid var(--accent-student);
+    background: color-mix(in srgb, canvas, transparent 5%);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card:hover {
+    box-shadow: 0px 8px 30px rgba(58, 134, 255, 0.2);
+}
+
+.mainInfo {
+    padding: 20px 25px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: color-mix(in srgb, canvastext, transparent 96%);
+    border-bottom: 1px solid var(--border-soft);
+}
+
+.mainInfo h1 {
+    font-size: 1.6rem;
+    font-weight: bold;
+    color: var(--accent-student);
+    margin: 0;
+}
+
+.mainInfo a {
+    text-decoration: none;
+    font-size: 1.5rem;
+    background: canvas;
+    width: 45px;
+    height: 45px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+}
+
+.mainInfo a:hover {
+    transform: scale(1.15) rotate(90deg);
+    background: var(--accent-student);
+    color: white;
+}
+
+.details-section {
+    padding: 25px;
+    text-align: left;
+    font-size: 1.1rem;
+    line-height: 1.8;
+}
+
+.details-section p {
+    margin-bottom: 10px;
+    border-bottom: 1px dashed var(--border-soft);
+    padding-bottom: 8px;
+}
+
+.details-section p:last-child {
+    border-bottom: none;
+}
+
+.table-container {
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 500px;
+}
+
+th, td {
+    padding: 18px 20px;
+    border-bottom: 1px solid var(--border-soft);
+    white-space: nowrap;
+    text-align: center;
+}
+
+th {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: color-mix(in srgb, canvastext, transparent 40%);
+    background: color-mix(in srgb, canvastext, transparent 98%);
+}
+
+tr:last-child td {
+    border-bottom: none;
+}
+
+tr:hover {
+    background: color-mix(in srgb, canvastext, transparent 94%);
+}
+
+
+/* Dashboard Grid Styles */
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    padding: 20px;
+}
+
+.dashboard-action {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 25px 15px;
+    background: color-mix(in srgb, canvas, transparent 5%);
+    border: 1px solid var(--border-soft);
+    border-radius: 12px;
+    text-decoration: none;
+    color: canvastext;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
+    font-size: 1.1rem;
+    font-weight: 500;
+}
+
+.dashboard-action:hover {
+    transform: translateY(-5px);
+    box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.2);
+    /* The color gets set dynamically by the parent specific accent variable if applied */
+}
+
+.dashboard-action .icon {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+}

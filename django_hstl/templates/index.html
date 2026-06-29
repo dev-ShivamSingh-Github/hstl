@@ -12,12 +12,23 @@
 {% else %}
 ❌
 {% endif %}
+{% if messages %}
+  <form>
+    {% for message in messages %}
+    <div>
+      <ul class="errorlist">
+        <li>{{ message }}</li>
+      </ul>
+    </div>
+    {% endfor %}
+  </form>
+{% endif %}
 {% endblock content %}
 {% block footer %}
   <div>
     <!-- <a href="{% url 'hstl:index' %}">🔑<br> -->
     <a href="#login">🔑<br>
-      <p>Forget Password?</p>
+      <p>Forget<br>Password?</p>
     </a>
   </div>
   <div>
